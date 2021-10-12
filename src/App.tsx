@@ -11,6 +11,8 @@ function App(): JSX.Element {
                 <p>
                     Edit <code>src/App.tsx</code> and save to reload.
                     Dennis Mirza
+                </p>
+                <p>
                     Tim Longoria
                 </p>
             </header>
