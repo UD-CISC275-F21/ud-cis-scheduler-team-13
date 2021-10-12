@@ -15,6 +15,7 @@ function App(): JSX.Element {
                 <p>
                     Tim Longoria
                 </p>
+                <p> Sebastian Cortes</p>
             </header>
         </div>
     );
