@@ -17,3 +17,8 @@ Juan wants to know how many classes and which classes he has to take to earn a C
 Juan doesn't know how much room he has after his major's classes to take CS classes.
 He also doesn't know what interesting classes are available. 
 
+Natalie Hicks  
+CIS Sophomore Year Student.  
+Natalies becomes stressed by the class registration process.  
+She wants to be able to set up her courses for the rest of college and be able to occasionally view and edit her choices.  
+She doesn't know any convenient ways to build and save her course schedule. 
