@@ -9,7 +9,7 @@ Undecided Minor.
 She is still undecided but she wants to learn more about the CIS major.
 
 Juan Garcia  
-Engineering Major, CIS Minor, Junior Year Student.  
+Engineering Major, CIS Minor, Sophomore Year Student.  
 Juan wants to know how many classes and which classes he has to take to earn a CIS minor.
 Juan doesn't know how much room he has after his major's classes to take CS classes.
 He also doesn't know what the interesting classes are available. 
