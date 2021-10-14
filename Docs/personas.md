@@ -15,5 +15,5 @@ Juan Garcia
 Engineering Major, CIS Minor, Sophomore Year Student.  
 Juan wants to know how many classes and which classes he has to take to earn a CIS minor.
 Juan doesn't know how much room he has after his major's classes to take CS classes.
-He also doesn't know what the interesting classes are available. 
+He also doesn't know what interesting classes are available. 
 
