@@ -3,6 +3,8 @@
 John Joe.  
 CIS Freshman Year Student.  
 He wants to know what courses are out there.  
+John is curious about the possible CIS concentrations and respective courses.
+He is having difficulty visualizing different possible schedules for his future college career.
 
 Jessica Jones.  
 Undecided Major.  
