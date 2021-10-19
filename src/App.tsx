@@ -1,6 +1,9 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+// import {Container, Row, Col} from "react-bootstrap";
+
 
 function App(): JSX.Element {
     return (
@@ -17,6 +20,12 @@ function App(): JSX.Element {
                 </p>
                 <p> Sebastian Cortes</p>
             </header>
+                    
+            {/* <Container>
+                <Row>
+                    <Col>Bootstrap column</Col>
+                </Row>
+            </Container>     */}
         </div>
     );
 }
