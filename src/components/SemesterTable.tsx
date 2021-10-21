@@ -21,12 +21,12 @@ export function SemesterTable(): JSX.Element {
             </thead>
             <tbody>
                 { courses.map((course: Course) => {
-                    return (<tr key={course.id}>
+                    return <tr key={course.id}>
                         <td>{course.id}</td>
                         <td>{course.name}</td>
                         <td>{course.description}</td>
                         <td>{course.prereqs}</td>
-                    </tr>);
+                    </tr>;
                 })}
             </tbody>
         </Table>
