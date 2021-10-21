@@ -8,11 +8,12 @@ export function SemesterTable({semesterName}: {semesterName: string}): JSX.Eleme
         {id: "CISC210", name: "cisc210 name", description: "whatever 3", prereqs: ["5", "6"]}];
     
     // Different semesters have different credit limits
-    if (semesterName === "Fall" || semesterName === "Spring") {
-        const creditLim = 21;
-    } else if (semesterName === "Winter" || semesterName === "Summer") {
-        const creditLim = 7;
-    }
+    // Uncomment lines when use for creditLim is implemented
+    // if (semesterName === "Fall" || semesterName === "Spring") {
+    //     const creditLim = 21;
+    // } else if (semesterName === "Winter" || semesterName === "Summer") {
+    //     const creditLim = 7;
+    // }
 
     return <Container>
         <h4>
