@@ -7,7 +7,7 @@ import "./App.css";
 function App(): JSX.Element {
     return (
         <div className="App">
-        
+            UD CIS Scheduler
         </div>
     );
 }
