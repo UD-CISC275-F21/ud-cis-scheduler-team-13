@@ -8,7 +8,7 @@ export function SemesterTable(): JSX.Element {
         {id: "CISC210", name: "cisc210 name", description: "whatever 3", prereqs: ["5", "6"]}];
     const semesterName = "Fall";
 
-    return (<Container>
+    return <Container>
         <h4>
             {semesterName}
         </h4>
@@ -30,5 +30,5 @@ export function SemesterTable(): JSX.Element {
                 })}
             </tbody>
         </Table>
-    </Container>);
+    </Container>;
 }
