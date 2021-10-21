@@ -3,6 +3,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 // import {Container, Row, Col} from "react-bootstrap";
+import { SemesterTable } from "./components/SemesterTable";
 
 
 function App(): JSX.Element {
@@ -26,6 +27,7 @@ function App(): JSX.Element {
                     <Col>Bootstrap column</Col>
                 </Row>
             </Container>     */}
+            <SemesterTable></SemesterTable>
         </div>
     );
 }
