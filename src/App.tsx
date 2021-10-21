@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-// import {Container, Row, Col} from "react-bootstrap";
 import { SemesterTable } from "./components/SemesterTable";
 
 
@@ -21,12 +20,6 @@ function App(): JSX.Element {
                 </p>
                 <p> Sebastian Cortes</p>
             </header>
-                    
-            {/* <Container>
-                <Row>
-                    <Col>Bootstrap column</Col>
-                </Row>
-            </Container>     */}
             <SemesterTable></SemesterTable>
         </div>
     );
