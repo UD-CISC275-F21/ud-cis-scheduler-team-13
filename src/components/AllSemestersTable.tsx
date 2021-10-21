@@ -3,7 +3,7 @@ import React, { Container, Row, Col } from "react-bootstrap";
 
 export function AllSemestersTable(): JSX.Element {
 
-    return (<Container>
+    return <Container>
         <Row>
             <Col><SemesterTable semesterName='Fall'></SemesterTable></Col>
             <Col><SemesterTable semesterName='Spring'></SemesterTable></Col>
@@ -12,5 +12,5 @@ export function AllSemestersTable(): JSX.Element {
             <Col><SemesterTable semesterName='Summer'></SemesterTable></Col>
             <Col><SemesterTable semesterName='Winter'></SemesterTable></Col>
         </Row>                
-    </Container>);
+    </Container>;
 }
