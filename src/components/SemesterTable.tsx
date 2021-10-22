@@ -3,9 +3,9 @@ import React, { Container, Table } from "react-bootstrap";
 
 export function SemesterTable({semesterName}: {semesterName: string}): JSX.Element {
     const courses: Course[] = [
-        {id: "CISC275", name: "Introduction to Software Engineering", description: "description 1", prereqs: ["1", "2"]},
-        {id: "CISC181", name: "cisc181 name", description: "description 2", prereqs: ["3", "4"]},
-        {id: "CISC210", name: "cisc210 name", description: "description 3", prereqs: ["5", "6"]}];
+        {id: "CISC275", name: "Introduction to Software Engineering", description: "Description 1", prereqs: ["CISC220"]},
+        {id: "CISC181", name: "Introduction to Computer Science II", description: "Description 2", prereqs: ["CISC108"]},
+        {id: "CISC210", name: "Introduction to Systems Programming", description: "Description 3", prereqs: ["CISC108"]}];
     
     // Different semesters have different credit limits
     // Uncomment lines when use for creditLim is implemented
