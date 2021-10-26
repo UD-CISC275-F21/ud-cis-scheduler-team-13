@@ -12,7 +12,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     // Temporary function
     function addCourse(): void {
         setAllCourses(allCourses);
-        console.log('adding course');
+        console.log("adding course");
     }
     addCourse();
 
