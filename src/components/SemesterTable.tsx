@@ -12,8 +12,10 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     // Temporary function
     function addCourse(): void {
         setAllCourses(allCourses);
+        console.log('adding course');
     }
     addCourse();
+
     return <Container>
         <h4>
             {semesterName}, credit limit: {creditLimit}
@@ -36,5 +38,6 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                 })}
             </tbody>
         </Table>
+        <button onClick={addCourse}>temp add course</button>
     </Container>;
 }
