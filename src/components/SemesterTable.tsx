@@ -14,7 +14,6 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         setAllCourses(allCourses);
         console.log("adding course");
     }
-    addCourse();
 
     return <Container>
         <h4>
