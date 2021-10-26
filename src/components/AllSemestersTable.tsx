@@ -10,12 +10,12 @@ export function AllSemestersTable(): JSX.Element {
 
     return <Container>
         <Row>
-            <Col><SemesterTable semesterName='Fall'></SemesterTable></Col>
-            <Col><SemesterTable semesterName='Spring'></SemesterTable></Col>
+            <Col><SemesterTable semesterName='Fall' courses={courses}></SemesterTable></Col>
+            <Col><SemesterTable semesterName='Spring' courses={courses}></SemesterTable></Col>
         </Row>
         <Row>
-            <Col><SemesterTable semesterName='Summer'></SemesterTable></Col>
-            <Col><SemesterTable semesterName='Winter'></SemesterTable></Col>
+            <Col><SemesterTable semesterName='Summer' courses={courses}></SemesterTable></Col>
+            <Col><SemesterTable semesterName='Winter' courses={courses}></SemesterTable></Col>
         </Row>                
     </Container>;
 }
