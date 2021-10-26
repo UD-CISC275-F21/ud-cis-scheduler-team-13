@@ -1,10 +1,13 @@
 import { Course } from "../interfaces/Course";
 import React, { Container, Table } from "react-bootstrap";
 
-export function SemesterTable({semesterName, creditLimit, courses}: {
+export function SemesterTable({semesterName, creditLimit, allCourses, setAllCourses}: {
         semesterName: string, 
         creditLimit: number,
-        courses: Course[]}): JSX.Element {
+        allCourses: Record<string, Course[]>
+        setAllCourses: (c: Record<string, Course[]>)=>void}): JSX.Element {
+
+    let courses: Course[] = allCourses.semesterName;
 
     return <Container>
         <h4>
