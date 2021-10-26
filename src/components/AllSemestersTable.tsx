@@ -4,6 +4,10 @@ import { Course } from "../interfaces/Course";
 import { useState } from "react";
 
 export function AllSemestersTable(): JSX.Element {
+    // Hook to track courses across semesters
+    // Pass this into SemesterTable
+    const [allCourses, setAllCourses] = useState<Record<string, Course[]>>(defaultCourses);
+
     const courses: Course[] = [
         {id: "CISC275", name: "Introduction to Software Engineering", description: "Description 1", prereqs: ["CISC220"]},
         {id: "CISC181", name: "Introduction to Computer Science II", description: "Description 2", prereqs: ["CISC108"]},
@@ -22,10 +26,6 @@ export function AllSemestersTable(): JSX.Element {
         "Summer2021": courses,
         "Winter2021": courses,
         "Remaining": []};
-
-    // Hook to track courses across semesters
-    // Pass this into SemesterTable
-    const [allCourses, setAllCourses] = useState<Record<string, Course[]>>(defaultCourses);
 
     // https://stackoverflow.com/questions/11345296/partitioning-in-javascript
     // user starbeamrainbowlabs
