@@ -1,5 +1,5 @@
 import { SemesterTable } from "./SemesterTable";
-import React, { Container, Row, Col } from "react-bootstrap";
+import React, { Container, Row, Col, Button } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 import { useState } from "react";
 
@@ -56,10 +56,15 @@ export function AllSemestersTable(): JSX.Element {
             return -1; // this shouldn't happen lol
         }
     }
+
+    function addSemesterClick() {
+        console.log("adding semester");
+    }
     
     const partitionedKeys = partitionSemesters(allCourses, 2);
 
     return <Container>
+        <Button onClick={addSemesterClick}>Add Semester</Button>
         {partitionedKeys.map((nKeys: string[]) => {
             return <Row key={nKeys[1]}> 
                 {nKeys.map((key: string) => {
