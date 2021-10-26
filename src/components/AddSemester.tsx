@@ -7,7 +7,7 @@ export function AddSemester({allCourses, setAllCourses}: {
     setAllCourses: (c: Record<string, Course[]>)=>void}): JSX.Element {
 
     const [dropdownSeason, setDropdownSeason] = useState<string>("Fall");
-    const [year, setYear] = useState<number>(2022);
+    const [year, setYear] = useState<string>("2022");
 
     function handleSeasonSelect(key: string | null, event: SyntheticEvent<unknown>): void {
         if (key !== null) {
@@ -16,8 +16,14 @@ export function AddSemester({allCourses, setAllCourses}: {
     }
 
     function yearChange(e: ChangeEvent<HTMLInputElement>): void {
-        const year: number = parseInt(e.target.value,10);
         setYear(year);
+    }
+
+    function addSemester(): void {
+        const semesterName: string = dropdownSeason + year;
+        const newAllCourses: Record<string, Course[]> = {...allCourses};
+        newAllCourses[semesterName] = [];
+        setAllCourses(newAllCourses);
     }
 
     return <Row>
@@ -37,7 +43,7 @@ export function AddSemester({allCourses, setAllCourses}: {
             </Form>
         </Col>
         <Col>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" onClick={addSemester}>Submit</Button>
         </Col>
     </Row>;
 }
