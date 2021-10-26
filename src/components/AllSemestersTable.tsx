@@ -75,7 +75,8 @@ export function AllSemestersTable(): JSX.Element {
             return <Row key={nKeys[1]}> 
                 {nKeys.map((key: string) => {
                     return <Col key={key}>
-                        <SemesterTable semesterName={key} creditLimit={getCreditLim(key)} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable>
+                        <SemesterTable semesterName={key} creditLimit={getCreditLim(key)} 
+                            allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable>
                     </Col>;
                 })}
             </Row>;
