@@ -13,7 +13,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     function addCourse(): void {
         setAllCourses(allCourses);
     }
-
+    addCourse();
     return <Container>
         <h4>
             {semesterName}, credit limit: {creditLimit}
