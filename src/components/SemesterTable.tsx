@@ -6,14 +6,6 @@ export function SemesterTable({semesterName, creditLimit, courses}: {
         semesterName: string, 
         creditLimit: number,
         courses: Course[]}): JSX.Element {
-    
-    // Different semesters have different credit limits
-    // Uncomment lines when use for creditLim is implemented
-    // if (semesterName === "Fall" || semesterName === "Spring") {
-    //     const creditLim = 21;
-    // } else if (semesterName === "Winter" || semesterName === "Summer") {
-    //     const creditLim = 7;
-    // }
 
     return <Container>
         <h4>
