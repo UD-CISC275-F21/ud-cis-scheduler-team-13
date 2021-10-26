@@ -2,6 +2,7 @@ import { SemesterTable } from "./SemesterTable";
 import React, { Container, Row, Col, Button } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 import { useState } from "react";
+import { AddSemester } from "./AddSemester";
 
 export function AllSemestersTable(): JSX.Element {
 
@@ -61,6 +62,7 @@ export function AllSemestersTable(): JSX.Element {
     const partitionedKeys = partitionSemesters(allCourses, 2);
 
     return <Container>
+        <AddSemester></AddSemester>
         {partitionedKeys.map((nKeys: string[]) => {
             return <Row key={nKeys[1]}>
                 {nKeys.map((key: string) => {
