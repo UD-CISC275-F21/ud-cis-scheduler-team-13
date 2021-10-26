@@ -1,7 +1,11 @@
 import { Course } from "../interfaces/Course";
 import React, { Container, Table } from "react-bootstrap";
+import internal from "stream";
 
-export function SemesterTable({semesterName, courses}: {semesterName: string, courses: Course[]}): JSX.Element {
+export function SemesterTable({semesterName, creditLimit, courses}: {
+        semesterName: string, 
+        creditLimit: number,
+        courses: Course[]}): JSX.Element {
     
     // Different semesters have different credit limits
     // Uncomment lines when use for creditLim is implemented
