@@ -9,7 +9,7 @@ export function SemesterTable({semesterName, creditLimit, courses}: {
 
     return <Container>
         <h4>
-            {semesterName}
+            {semesterName}, credit limit: {creditLimit}
         </h4>
         
         <Table>
