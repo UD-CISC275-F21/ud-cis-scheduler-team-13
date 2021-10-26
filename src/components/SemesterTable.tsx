@@ -1,5 +1,6 @@
 import { Course } from "../interfaces/Course";
-import React, { Container, Table } from "react-bootstrap";
+import React, { Container, Table, Button } from "react-bootstrap";
+
 
 export function SemesterTable({semesterName, creditLimit, allCourses, setAllCourses}: {
         semesterName: string, 
@@ -37,6 +38,6 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                 })}
             </tbody>
         </Table>
-        <button onClick={addCourse}>temp add course</button>
+        <Button onClick={addCourse}>temp add course</Button>
     </Container>;
 }
