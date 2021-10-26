@@ -58,7 +58,8 @@ export function AllSemestersTable(): JSX.Element {
     }
 
     function addSemesterClick() {
-        console.log("adding semester");
+        setAllCourses({...allCourses, "Fall2022": courses1});
+        console.log(allCourses);
     }
     
     const partitionedKeys = partitionSemesters(allCourses, 2);
@@ -66,7 +67,7 @@ export function AllSemestersTable(): JSX.Element {
     return <Container>
         <Button onClick={addSemesterClick}>Add Semester</Button>
         {partitionedKeys.map((nKeys: string[]) => {
-            return <Row key={nKeys[1]}> 
+            return <Row key={nKeys[1]}>
                 {nKeys.map((key: string) => {
                     return <Col key={key}>
                         <SemesterTable semesterName={key} creditLimit={getCreditLim(key)} 
