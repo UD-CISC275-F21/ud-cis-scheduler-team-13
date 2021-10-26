@@ -27,14 +27,32 @@ export function AllSemestersTable(): JSX.Element {
     // Pass this into SemesterTable
     const [allCourses, setAllCourses] = useState<Record<string, Course[]>>(defaultCourses);
 
+    // return <Container>
+    //     <Row>
+    //         <Col><SemesterTable semesterName="Fall" creditLimit={21} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
+    //         <Col><SemesterTable semesterName="Spring" creditLimit={21} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
+    //     </Row>
+    //     <Row>
+    //         <Col><SemesterTable semesterName="Summer" creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
+    //         <Col><SemesterTable semesterName="Winter" creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
+    //     </Row>                
+    // </Container>;
+
+    // https://stackoverflow.com/questions/11345296/partitioning-in-javascript
+    // user starbeamrainbowlabs
+    function partitionSemesters(allCourses: Record<string, Course[]>, n: number): string[][] {
+        // Returns allCourses keys partioned by n
+        // example: [Fall, Summer, Winter, Spring] -> [[Fall, Summer], [Winter, Spring]]
+        const keys = Object.keys(allCourses);
+        const partitioned: string[][] = [];
+
+        for (let i = 0; i < keys.length; i += n) {
+            partitioned[partitioned.length] = keys.slice(i, i+n);
+        }
+        return partitioned;
+    }
+    
     return <Container>
-        <Row>
-            <Col><SemesterTable semesterName="Fall" creditLimit={21} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
-            <Col><SemesterTable semesterName="Spring" creditLimit={21} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
-        </Row>
-        <Row>
-            <Col><SemesterTable semesterName="Summer" creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
-            <Col><SemesterTable semesterName="Winter" creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
-        </Row>                
+
     </Container>;
 }
