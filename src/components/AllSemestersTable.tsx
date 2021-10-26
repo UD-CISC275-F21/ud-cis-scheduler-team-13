@@ -29,12 +29,12 @@ export function AllSemestersTable(): JSX.Element {
 
     return <Container>
         <Row>
-            <Col><SemesterTable semesterName="Fall" creditLimit={21} courses={courses1}></SemesterTable></Col>
-            <Col><SemesterTable semesterName="Spring" creditLimit={21} courses={courses1}></SemesterTable></Col>
+            <Col><SemesterTable semesterName="Fall" creditLimit={21} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
+            <Col><SemesterTable semesterName="Spring" creditLimit={21} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
         </Row>
         <Row>
-            <Col><SemesterTable semesterName="Summer" creditLimit={7} courses={courses}></SemesterTable></Col>
-            <Col><SemesterTable semesterName="Winter" creditLimit={7} courses={courses}></SemesterTable></Col>
+            <Col><SemesterTable semesterName="Summer" creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
+            <Col><SemesterTable semesterName="Winter" creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable></Col>
         </Row>                
     </Container>;
 }
