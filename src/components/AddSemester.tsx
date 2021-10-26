@@ -1,7 +1,11 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import React, { Container, Row, Dropdown, DropdownButton, Form, Col, Button } from "react-bootstrap";
+import { Course } from "../interfaces/Course";
 
-export function AddSemester(): JSX.Element {
+export function AddSemester({allCourses, setAllCourses}: {
+    allCourses: Record<string, Course[]>,
+    setAllCourses: (c: Record<string, Course[]>)=>void}): JSX.Element {
+
     const [dropdownSeason, setDropdownSeason] = useState<string>("Fall");
     const [year, setYear] = useState<number>(2022);
 

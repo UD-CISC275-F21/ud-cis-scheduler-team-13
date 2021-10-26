@@ -62,7 +62,7 @@ export function AllSemestersTable(): JSX.Element {
     const partitionedKeys = partitionSemesters(allCourses, 2);
 
     return <Container>
-        <AddSemester></AddSemester>
+        <AddSemester allCourses={allCourses} setAllCourses={setAllCourses}></AddSemester>
         {partitionedKeys.map((nKeys: string[]) => {
             return <Row key={nKeys[1]}>
                 {nKeys.map((key: string) => {
