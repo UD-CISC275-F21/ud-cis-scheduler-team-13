@@ -17,10 +17,10 @@ export function AllSemestersTable(): JSX.Element {
     // Take list of courses and sort them into default semesters,
     // or maybe leave semesters blank by default
     const defaultCourses: Record<string, Course[]> = {
-        "Fall": courses1,
-        "Spring": courses1,
-        "Summer": courses,
-        "Winter": courses,
+        "Fall2021": courses1,
+        "Spring2021": courses1,
+        "Summer2021": courses,
+        "Winter2021": courses,
         "Remaining": []};
 
     // Hook to track courses across semesters
@@ -57,6 +57,16 @@ export function AllSemestersTable(): JSX.Element {
         }
         return partitioned;
     }
+
+    function getCreditLim(semesterName: string): number {
+        if (semesterName.includes("Fall") || semesterName.includes("Spring")) {
+            return 21;
+        } else if (semesterName.includes("Winter") || semesterName.includes("Summer")) {
+            return 7;
+        } else {
+            return -1; // this shouldn't happen lol
+        }
+    }
     
     const partitionedKeys = partitionSemesters(allCourses, 2);
 
@@ -65,7 +75,7 @@ export function AllSemestersTable(): JSX.Element {
             return <Row key={nKeys[1]}> 
                 {nKeys.map((key: string) => {
                     return <Col key={key}>
-                        <SemesterTable semesterName={key} creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable>
+                        <SemesterTable semesterName={key} creditLimit={getCreditLim(key)} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable>
                     </Col>;
                 })}
             </Row>;
