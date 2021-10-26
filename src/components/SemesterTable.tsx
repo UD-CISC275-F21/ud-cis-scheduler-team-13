@@ -7,7 +7,12 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         allCourses: Record<string, Course[]>
         setAllCourses: (c: Record<string, Course[]>)=>void}): JSX.Element {
 
-    let courses: Course[] = allCourses.semesterName;
+    const courses: Course[] = allCourses.semesterName;
+
+    // Temporary function
+    function addCourse(): void {
+        setAllCourses(allCourses);
+    }
 
     return <Container>
         <h4>
