@@ -46,13 +46,29 @@ export function AllSemestersTable(): JSX.Element {
         const keys = Object.keys(allCourses);
         const partitioned: string[][] = [];
 
+        // Remove Remaining key
+        const index: number = keys.indexOf("Remaining");
+        if (index > -1) {
+            keys.splice(index,1);
+        }
+
         for (let i = 0; i < keys.length; i += n) {
             partitioned[partitioned.length] = keys.slice(i, i+n);
         }
         return partitioned;
     }
     
-    return <Container>
+    const partitionedKeys = partitionSemesters(allCourses, 2);
 
+    return <Container>
+        {partitionedKeys.map((nKeys: string[]) => {
+            return <Row key={nKeys[1]}> 
+                {nKeys.map((key: string) => {
+                    return <Col key={key}>
+                        <SemesterTable semesterName={key} creditLimit={7} allCourses={allCourses} setAllCourses={setAllCourses}></SemesterTable>
+                    </Col>;
+                })}
+            </Row>;
+        })}
     </Container>;
 }
