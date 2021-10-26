@@ -4,6 +4,7 @@ import { Course } from "../interfaces/Course";
 import { useState } from "react";
 
 export function AllSemestersTable(): JSX.Element {
+
     const courses: Course[] = [
         {id: "CISC275", name: "Introduction to Software Engineering", description: "Description 1", prereqs: ["CISC220"]},
         {id: "CISC181", name: "Introduction to Computer Science II", description: "Description 2", prereqs: ["CISC108"]},
@@ -56,16 +57,10 @@ export function AllSemestersTable(): JSX.Element {
             return -1; // this shouldn't happen lol
         }
     }
-
-    function addSemesterClick() {
-        setAllCourses({...allCourses, "Fall2022": courses1});
-        console.log(allCourses);
-    }
     
     const partitionedKeys = partitionSemesters(allCourses, 2);
 
     return <Container>
-        <Button onClick={addSemesterClick}>Add Semester</Button>
         {partitionedKeys.map((nKeys: string[]) => {
             return <Row key={nKeys[1]}>
                 {nKeys.map((key: string) => {
