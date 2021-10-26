@@ -1,6 +1,5 @@
 import { Course } from "../interfaces/Course";
 import React, { Container, Table } from "react-bootstrap";
-import internal from "stream";
 
 export function SemesterTable({semesterName, creditLimit, courses}: {
         semesterName: string, 
