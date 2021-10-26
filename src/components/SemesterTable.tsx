@@ -1,10 +1,19 @@
 import { Course } from "../interfaces/Course";
 import React, { Container, Table } from "react-bootstrap";
 
-export function SemesterTable({semesterName, creditLimit, courses}: {
+export function SemesterTable({semesterName, creditLimit, allCourses, setAllCourses}: {
         semesterName: string, 
         creditLimit: number,
-        courses: Course[]}): JSX.Element {
+        allCourses: Record<string, Course[]>
+        setAllCourses: (c: Record<string, Course[]>)=>void}): JSX.Element {
+
+    const courses: Course[] = allCourses[semesterName];
+
+    // Temporary function
+    function addCourse(): void {
+        setAllCourses(allCourses);
+        console.log("adding course");
+    }
 
     return <Container>
         <h4>
@@ -28,5 +37,6 @@ export function SemesterTable({semesterName, creditLimit, courses}: {
                 })}
             </tbody>
         </Table>
+        <button onClick={addCourse}>temp add course</button>
     </Container>;
 }
