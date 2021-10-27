@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { useState } from "react";
 import React, { Container, Row, Dropdown, DropdownButton, Form, Col, Button } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 
