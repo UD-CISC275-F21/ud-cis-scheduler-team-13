@@ -1,5 +1,5 @@
 import { SemesterTable } from "./SemesterTable";
-import React, { Container, Row, Col, Button } from "react-bootstrap";
+import React, { Container, Row, Col } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 import { useState } from "react";
 import { AddSemester } from "./AddSemester";
