@@ -15,7 +15,7 @@ export function AddSemester({allCourses, setAllCourses}: {
         }
     }
 
-    function yearChange(e: ChangeEvent<HTMLInputElement>): void {
+    function yearChange(): void {
         setYear(year);
     }
 
