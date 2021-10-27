@@ -9,7 +9,7 @@ export function AddSemester({allCourses, setAllCourses}: {
     const [dropdownSeason, setDropdownSeason] = useState<string>("Fall");
     const [year, setYear] = useState<string>("2022");
 
-    function handleSeasonSelect(key: string | null, event: SyntheticEvent<unknown>): void {
+    function handleSeasonSelect(key: string | null): void {
         if (key !== null) {
             setDropdownSeason(key);
         }
