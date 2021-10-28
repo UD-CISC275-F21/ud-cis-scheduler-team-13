@@ -177,3 +177,25 @@
   width: 80%; 
   text-align: center;
 }
+
+/* Welcome Message */
+
+.Welcome-message {
+  margin: 30px;
+}
+
+.Welcome-message h1 {
+  font-family: 'greycliff-bold'; 
+  font-size: 60px;
+  color: #00539F;
+}
+
+.Welcome-message p {
+  font-family: 'greycliff-light';
+  font-size: 25px;
+}
+
+.initial-schedule{
+  display: flex;
+  justify-content: center;
+}
