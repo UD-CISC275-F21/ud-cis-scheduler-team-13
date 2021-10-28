@@ -9,11 +9,11 @@ export function AllSemestersTable(): JSX.Element {
     // Take list of courses and sort them into default semesters,
     // or maybe leave semesters blank by default
     const defaultCourses: Record<string, Course[]> = {
-        "Fall2021": [],
-        "Spring2021": [],
-        "Summer2021": [],
-        "Winter2021": [],
-        "Remaining": (catalog as Course[])};
+        "Fall2020": [catalog[0] as Course],
+        "Spring2021": [catalog[1] as Course],
+        "Summer2021": [catalog[2] as Course],
+        "Winter2021": [catalog[3] as Course],
+        "Remaining": (catalog.slice(4) as Course[])};
 
     // Hook to track courses across semesters
     // Pass this into SemesterTable
