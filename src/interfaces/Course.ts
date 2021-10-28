@@ -1,6 +1,8 @@
 export interface Course {
     id: string
     name: string
-    description: string
-    prereqs: string[]
+    credit: number
+    description?: string
+    prereqs?: string[]
+    ubreadth?: string
 }
