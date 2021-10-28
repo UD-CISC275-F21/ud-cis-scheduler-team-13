@@ -13,7 +13,7 @@ export function AllSemestersTable(): JSX.Element {
         "Spring2021": [catalog[1] as Course],
         "Summer2021": [catalog[2] as Course],
         "Winter2021": [catalog[3] as Course],
-        "Remaining": (catalog.slice(4) as Course[])};
+        "Remaining": catalog.slice(4) as Course[]};
 
     // Hook to track courses across semesters
     // Pass this into SemesterTable
