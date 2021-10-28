@@ -32,7 +32,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                     return <tr key={course.id}>
                         <td>{course.id}</td>
                         <td>{course.name}</td>
-                        <td>{course.description}</td>
+                        {/* <td>{course.description}</td> */}
                         <td>{course.prereqs}</td>
                     </tr>;
                 })}
