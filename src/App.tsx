@@ -3,6 +3,7 @@ import React from "react";
 import "./App.css";
 import { AllSemestersTable } from "./components/AllSemestersTable";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 
 function App(): JSX.Element {
@@ -10,7 +11,10 @@ function App(): JSX.Element {
         <div className="App">
 
             <Header></Header>
+            
             <AllSemestersTable></AllSemestersTable>
+
+            <Footer></Footer>
 
         </div>
     );
