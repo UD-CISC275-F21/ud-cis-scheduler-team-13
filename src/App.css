@@ -22,10 +22,6 @@
   font-style: normal;
 }
 
-header#udHeader #udHeaderContainer, div#udHeader-collegeBar { 
-  max-width: 1024px; 
-}
-
 .udHeader { 
   position: relative; 
   width: 100%; 
@@ -88,12 +84,4 @@ header#udHeader #udHeaderContainer, div#udHeader-collegeBar {
 
 .udHeader-collegeWrapper a:hover { 
   text-decoration: none; 
-}
-
-.App {
-  margin: 0%;
-}
-
-.App-body { 
-  margin: 0; 
 }
