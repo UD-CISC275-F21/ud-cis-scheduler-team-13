@@ -1,38 +1,99 @@
+@font-face {
+  font-family: 'greycliff-bold';
+  src: url('//www.udel.edu/content/dam/udelImages/digital-brand-assets/fonts/GreycliffCF-Bold.woff2') format('woff2'),
+       url('//www.udel.edu/content/dam/udelImages/digital-brand-assets/fonts/GreycliffCF-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'greycliff-light';
+  src: url('//www.udel.edu/content/dam/udelImages/digital-brand-assets/fonts/GreycliffCF-Light.woff2') format('woff2'),
+       url('//www.udel.edu/content/dam/udelImages/digital-brand-assets/fonts/GreycliffCF-Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'vanguard-regular';
+  src: url('//www.udel.edu/content/dam/udelImages/digital-brand-assets/fonts/vanguard-cf-regular.woff2') format('woff2'),
+       url('//www.udel.edu/content/dam/udelImages/digital-brand-assets/fonts/vanguard-cf-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+header#udHeader #udHeaderContainer, div#udHeader-collegeBar { 
+  max-width: 1024px; 
+}
+
+.udHeader { 
+  position: relative; 
+  width: 100%; 
+  background-color: #00539f; 
+  border-bottom: 2px solid #ffd300; 
+  float: left; 
+}
+
+.udHeaderContainer { 
+  width: 100%; 
+  margin: auto; 
+  overflow: hidden; 
+  position: relative; 
+}
+
+.udHeaderWrapper { 
+  position: relative; 
+  width: 100%; 
+  float: left;
+}
+
+.udHeaderLogo img { 
+  height: 70px; 
+  float: left; 
+  margin: 20px; 
+}
+
+.udHeader-collegeOuterWrapper { 
+  width: 100%; 
+  background: #003c71; 
+  overflow: hidden; 
+  position: relative; 
+  z-index: 1000; 
+}
+
+.udHeader-collegeBar { 
+  width: 100%; 
+  margin: auto; 
+  padding: 15px 25px; 
+  font-size: 18px; 
+  box-sizing: border-box; 
+  background: #003c71; 
+  overflow: hidden; 
+  position: relative; 
+  z-index: 1000; 
+  line-height: normal; 
+}
+
+.udHeader-collegeWrapper a { 
+  font-family: 'greycliff-bold'; 
+  letter-spacing: 1px; 
+  text-transform: uppercase; 
+  color: #FFF; 
+  text-decoration: none; 
+  line-height: normal;
+  font-weight: normal; 
+  -webkit-font-smoothing: auto; 
+  -moz-osx-font-smoothing: auto; 
+}
+
+.udHeader-collegeWrapper a:hover { 
+  text-decoration: none; 
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-body { 
+  margin: 0; 
 }
