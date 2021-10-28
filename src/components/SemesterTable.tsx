@@ -24,7 +24,8 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         <Table>
             <thead>
                 <tr>
-                    <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th>
+                    {/* <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th> */}
+                    <th>ID</th><th>Name</th><th>Prereqs</th>                    
                 </tr>
             </thead>
             <tbody>
