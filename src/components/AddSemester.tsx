@@ -26,9 +26,9 @@ export function AddSemester({allCourses, setAllCourses}: {
         setAllCourses(newAllCourses);
     }
 
-    return <Container>
+    return <Container className="m-3 p-3 border border-primary">
         <Row>
-            <h3>Add Semester to Plan</h3>
+            <h3 className="addSemesterH3">Add Semester to Plan</h3>
         </Row>
         <Row>
             <Col>
