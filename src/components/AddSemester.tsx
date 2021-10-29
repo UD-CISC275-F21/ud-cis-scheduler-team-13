@@ -42,7 +42,7 @@ export function AddSemester({allCourses, setAllCourses}: {
             <Col>
                 <Form>
                     <Form.Group>
-                        <Form.Control type="year" placeholder="year" onChange={yearChange}></Form.Control>
+                        <Form.Control type="year" placeholder="Year" onChange={yearChange}></Form.Control>
                     </Form.Group>
                 </Form>
             </Col>
