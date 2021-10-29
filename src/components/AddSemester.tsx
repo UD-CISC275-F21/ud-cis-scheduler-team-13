@@ -31,7 +31,7 @@ export function AddSemester({allCourses, setAllCourses}: {
             <h3 className="addSemesterH3">Add Semester to Plan</h3>
         </Row>
         <Row>
-            <Col>
+            <Col className="text-end">
                 <DropdownButton id="dropdown-season" title={dropdownSeason} onSelect={handleSeasonSelect}>
                     <Dropdown.Item eventKey="Fall">Fall</Dropdown.Item>
                     <Dropdown.Item eventKey="Winter">Winter</Dropdown.Item>
