@@ -12,12 +12,6 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     const courses: Course[] = allCourses[semesterName];
 
-    // Temporary function
-    function addCourse(): void {
-        setAllCourses(allCourses);
-        console.log("adding course");
-    }
-
     return <Container>
         <h4>
             {semesterName}, Credit Limit: {creditLimit}
