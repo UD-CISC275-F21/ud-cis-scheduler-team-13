@@ -45,6 +45,7 @@ export function AllSemestersTable(): JSX.Element {
     function compareSemesters(semA: string, semB: string): number {
         // Compare fn for semester names: Winter2022, Fall2021, Spring2021, etc.
         // would be sorted to: Spring2021, Fall2021, Winter2022
+        const sem: string = semA + semB;
         return 0;
     }
 
