@@ -15,8 +15,10 @@ export function AddSemester({allCourses, setAllCourses}: {
         }
     }
 
-    function yearChange(): void {
-        setYear(year);
+    function yearChange(key: string | null): void {
+        if (key !== null) {
+            setYear(key);
+        }        
     }
 
     function addSemester(): void {
@@ -25,6 +27,9 @@ export function AddSemester({allCourses, setAllCourses}: {
         newAllCourses[semesterName] = [];
         setAllCourses(newAllCourses);
     }
+
+    // Un-hardcode this later lol
+    const years = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028"];
 
     return <Container className="m-3 p-3 border border-primary">
         <Row>
@@ -39,12 +44,17 @@ export function AddSemester({allCourses, setAllCourses}: {
                     <Dropdown.Item eventKey="Summer">Summer</Dropdown.Item>
                 </DropdownButton>
             </Col>
-            <Col>
-                <Form>
+            <Col className="text-center">
+                {/* <Form>
                     <Form.Group>
                         <Form.Control type="year" placeholder="year" onChange={yearChange}></Form.Control>
                     </Form.Group>
-                </Form>
+                </Form> */}
+                <DropdownButton id="dropdown-year" title={year} onSelect={yearChange}>
+                    {years.map((y: string) => {
+                        return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
+                    })}
+                </DropdownButton>
             </Col>
             <Col>
                 <Button type="submit" onClick={addSemester}>Submit</Button>
