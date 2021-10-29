@@ -1,6 +1,5 @@
 import { Course } from "../interfaces/Course";
 import React, { Button, Form, Modal } from "react-bootstrap";
-import catalog from "../assets/Catalog.json";
 import { useState, ChangeEvent } from "react";
 
 export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
