@@ -33,10 +33,19 @@ export function AllSemestersTable(): JSX.Element {
             keys.splice(index,1);
         }
 
+        // Sort chronologically
+        keys.sort(compareSemesters);
+
         for (let i = 0; i < keys.length; i += n) {
             partitioned[partitioned.length] = keys.slice(i, i+n);
         }
         return partitioned;
+    }
+
+    function compareSemesters(semA: string, semB: string): number {
+        // Compare fn for semester names: Winter2022, Fall2021, Spring2021, etc.
+        // would be sorted to: Spring2021, Fall2021, Winter2022
+        return 0;
     }
 
     function getCreditLim(semesterName: string): number {
