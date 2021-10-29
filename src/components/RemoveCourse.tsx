@@ -3,7 +3,7 @@ import React, { Button, Form, Modal } from "react-bootstrap";
 import catalog from "../assets/Catalog.json";
 import { useState, ChangeEvent } from "react";
 
-export function AddCourse({allCourses, setAllCourses, semesterName}: {
+export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
     allCourses: Record<string, Course[]>,
     setAllCourses: (c: Record<string, Course[]>)=>void, 
     semesterName: string}): JSX.Element {
@@ -20,10 +20,10 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
 
     function courseSubmit(){
         const copyCourses = {...allCourses};
-        for (let i = 0; i < copyCourses.Remaining.length; i++) {
-            if (copyCourses.Remaining[i].id === inputCourse){
-                copyCourses[semesterName].push(copyCourses.Remaining[i]);
-                copyCourses.Remaining.splice(i,1);
+        for (let i = 0; i < copyCourses[semesterName].length; i++) {
+            if (copyCourses[semesterName][i].id === inputCourse){
+                copyCourses.Remaining.push(copyCourses[semesterName][i]);
+                copyCourses[semesterName].splice(i,1);
             }
         }
         setAllCourses(copyCourses);
@@ -33,7 +33,7 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
     return(
         <div>
             <Button variant="primary" onClick={handleShow}>
-                Add Course
+                Remove Course
             </Button>
 
             <Modal show={show} onHide={handleClose}>
