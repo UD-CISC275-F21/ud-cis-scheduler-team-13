@@ -12,7 +12,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     const courses: Course[] = allCourses[semesterName];
 
-    return <Container>
+    return <Container className = "m-2 p-4 border border-primary">
         <Row>
             <h4>
                 {semesterName}, Credit Limit: {creditLimit}
