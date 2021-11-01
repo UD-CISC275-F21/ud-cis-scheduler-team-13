@@ -91,22 +91,11 @@
 /* App Design*/
 
 .App {
-  display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
 }
 
-.content {
-  flex: 1 0 auto;
-}
-
 /* Footer */
-
-.footer {
-  display: flex;
-  flex-shrink: 0;
-}
 
 .udFooter { 
   width: 100%;
@@ -198,7 +187,7 @@
 /* Welcome Message */
 
 .Welcome-message {
-  margin: 2em;
+  margin: auto;
 }
 
 .Welcome-message h1 {
