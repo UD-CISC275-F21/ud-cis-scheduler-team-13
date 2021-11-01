@@ -10,7 +10,7 @@ function Home(): JSX.Element {
             </div>
             <div>
                 <p>
-                    The UD CIS Scheduler is design so students, either new to the University or taking CIS courses to fullful minor requirements, can build a customizable schedule for the remaining time of their school career.
+                    This website is design so students, either new to the University or taking CIS courses to fullful minor requirements, can build a customizable schedule for the remaining time of their school career.
                     You can add and remove semesters as well as look at the prerequisites, credit limit and descriptions of all the courses you will ever need! This is the most exciting and personal way to build the perfect schedule specially
                     made for you, by you.
                 </p>
