@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import "./App.css";
-import Main from "./components/TablePage";
+import Main from "./components/Router";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Container, Button } from "react-bootstrap";
