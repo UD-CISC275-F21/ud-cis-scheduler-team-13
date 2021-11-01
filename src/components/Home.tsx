@@ -1,10 +1,10 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Home(): JSX.Element {
     return (
-        <div className="Welcome-message">
+        <Container className="Welcome-message">
             <div>
                 <h1> Welcome to the CIS Scheduler!</h1>
             </div>
@@ -25,7 +25,7 @@ function Home(): JSX.Element {
                 </div>
             </div>
 
-        </div>
+        </Container>
     );
 }
 
