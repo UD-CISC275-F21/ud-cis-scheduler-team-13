@@ -1,16 +1,25 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 
-import { AllSemestersTable } from "./AllSemestersTable";
-import App from "../App";
+import Scheduler from "./ShowTables";
+import Home from "./Home";
+//import { AllSemestersTable } from "./AllSemestersTable";
 
-function Router(): JSX.Element {
+function Redirect(): JSX.Element {
     return(
-        <Switch>
-            <Route exact path="/" component={App}></Route>
-            <Route exact path="/scheduler" component={AllSemestersTable}></Route>
-        </Switch>
+        <div>
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    <Route path="/scheduler">
+                        <Scheduler />
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
     );
 }
 
-export default Router;
+export default Redirect;
