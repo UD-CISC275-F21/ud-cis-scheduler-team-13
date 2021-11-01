@@ -6,7 +6,7 @@ function Home(): JSX.Element {
     return (
         <div className="Welcome-message">
             <div>
-                <h1> Welcome to the UD CIS Scheduler!</h1>
+                <h1> Welcome to the CIS Scheduler!</h1>
             </div>
             <div>
                 <p>

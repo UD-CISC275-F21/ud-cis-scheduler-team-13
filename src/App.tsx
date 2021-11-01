@@ -13,9 +13,11 @@ function App(): JSX.Element {
         <div className="App"> 
 
             <Header></Header>
- 
-            <Router /> 
 
+            <div className="Content">
+                <Router />
+            </div>
+ 
             <Footer></Footer>
 
         </div>

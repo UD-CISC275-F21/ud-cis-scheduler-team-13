@@ -9,7 +9,7 @@ import Linkedin from "../img/linkedin.png";
 
 export function Footer(): JSX.Element {
     return(
-        <div>
+        <div className="footer">
             <div className="udFooter">
                 <div className="udFooter-container">
                     <div className="udFooterHeader">
