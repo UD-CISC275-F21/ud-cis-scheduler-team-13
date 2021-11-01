@@ -12,7 +12,15 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     const courses: Course[] = allCourses[semesterName];
 
-
+    function removeSemester(): void {
+        const copyCourses = {...allCourses};
+        for (let i = 0; i < copyCourses[semesterName].length; i++) {
+            copyCourses.Remaining.push(copyCourses[semesterName][0]);
+            copyCourses[semesterName].splice(0,1);
+        }
+        delete copyCourses[semesterName];
+        setAllCourses(copyCourses);
+    }
 
     return <Container className = "m-2 p-4 border border-primary">
         <Row>
@@ -22,7 +30,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                 </h4>
             </Col>
             <Col className="text-end">
-                <Button variant="danger" size="sm">Remove Semester</Button>
+                <Button variant="danger" size="sm" onClick={removeSemester}>Remove Semester</Button>
             </Col>
         </Row>
         <Row>
