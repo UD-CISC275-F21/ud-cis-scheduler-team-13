@@ -18,7 +18,7 @@ export function Header(): JSX.Element {
                 <div className="udHeader-collegeBar">
                     <div className="udHeader-collegeWrapper">
                         <div className="udHeader-collegeName">
-                            <a href="#"> UD CIS Scheduler</a>
+                            <a href="https://ud-cisc275-f21.github.io/ud-cis-scheduler-team-13/"> UD CIS Scheduler</a>
                         </div>
                     </div>
                 </div>
