@@ -34,7 +34,9 @@ export function AllSemestersTable(): JSX.Element {
         }
 
         // Sort chronologically
+        console.log(keys);
         keys.sort(compareSemesters);
+        console.log(keys);
 
         for (let i = 0; i < keys.length; i += n) {
             partitioned[partitioned.length] = keys.slice(i, i+n);
@@ -45,9 +47,29 @@ export function AllSemestersTable(): JSX.Element {
     function compareSemesters(semA: string, semB: string): number {
         // Compare fn for semester names: Winter2022, Fall2021, Spring2021, etc.
         // would be sorted to: Spring2021, Fall2021, Winter2022
-        const sem: string = semA + semB;
-        if (sem) {
+
+        const seasonA: string = semA.substring(0,semA.length-4);
+        const seasonB: string = semA.substring(0,semB.length-4);
+
+        const yearA: number = parseInt(semA.substring(semA.length-4,semA.length),10);
+        const yearB: number = parseInt(semB.substring(semB.length-4,semB.length),10);
+
+        const valueA = yearA*4 + seasonToVal(seasonA);
+        const valueB = yearB*4 + seasonToVal(seasonB);
+
+        return valueA - valueB;
+    }
+
+    function seasonToVal(season: string): number {
+        switch(season) {
+        case "Winter":
             return 0;
+        case "Spring":
+            return 1;
+        case "Summer":
+            return 2;
+        case "Fall": 
+            return 3;
         }
         return 0;
     }
