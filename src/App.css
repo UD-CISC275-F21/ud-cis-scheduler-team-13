@@ -88,6 +88,27 @@
   text-decoration: none; 
 }
 
+/* App Design*/
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.App Header {
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.App Footer {
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.App body {
+  flex: 1 0 auto;
+}
 
 /* Footer */
 
@@ -181,7 +202,7 @@
 /* Welcome Message */
 
 .Welcome-message {
-  margin: 30px;
+  margin: 2em;
 }
 
 .Welcome-message h1 {
@@ -193,6 +214,7 @@
 .Welcome-message p {
   font-family: 'greycliff-light';
   font-size: 25px;
+  text-align: left;
 }
 
 .initial-schedule{
