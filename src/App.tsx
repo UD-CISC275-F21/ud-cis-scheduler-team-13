@@ -1,19 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import "./App.css";
-import { AllSemestersTable } from "./components/AllSemestersTable";
+import Router from "./components/Router";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+//import { Container, Button } from "react-bootstrap";
+
 
 
 function App(): JSX.Element {
     return (
-        <div className="App">
+        <div className="App"> 
 
             <Header></Header>
-            
-            <AllSemestersTable></AllSemestersTable>
 
+            <div className="Content">
+                <Router />
+            </div>
+ 
             <Footer></Footer>
 
         </div>
