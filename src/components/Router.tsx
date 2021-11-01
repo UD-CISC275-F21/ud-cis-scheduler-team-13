@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { AllSemestersTable } from "./AllSemestersTable";
 import App from "../App";
 
-function Main(): JSX.Element {
+function Router(): JSX.Element {
     return(
         <Switch>
             <Route exact path="/" component={App}></Route>
@@ -13,4 +13,4 @@ function Main(): JSX.Element {
     );
 }
 
-export default Main;
+export default Router;
