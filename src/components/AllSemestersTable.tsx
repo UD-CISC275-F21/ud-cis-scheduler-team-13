@@ -45,9 +45,29 @@ export function AllSemestersTable(): JSX.Element {
     function compareSemesters(semA: string, semB: string): number {
         // Compare fn for semester names: Winter2022, Fall2021, Spring2021, etc.
         // would be sorted to: Spring2021, Fall2021, Winter2022
-        const sem: string = semA + semB;
-        if (sem) {
+
+        const seasonA: string = semA.substring(0,4);
+        const seasonB: string = semB.substring(0,4);
+
+        const yearA: number = parseInt(semA.substring(4),10);
+        const yearB: number = parseInt(semB.substring(4),10);
+
+        const valueA = yearA*4 + seasonToVal(seasonA);
+        const valueB = yearB*4 + seasonToVal(seasonB);
+
+        return valueA - valueB;
+    }
+
+    function seasonToVal(season: string): number {
+        switch(season) {
+        case "Winter":
             return 0;
+        case "Spring":
+            return 1;
+        case "Summer":
+            return 2;
+        case "Fall": 
+            return 3;
         }
         return 0;
     }
