@@ -1,5 +1,7 @@
 import { Course } from "../interfaces/Course";
-import React, { Container, Table, Button } from "react-bootstrap";
+import React, { Container, Table, Row, Col } from "react-bootstrap";
+import { AddCourse } from "./AddCourse";
+import { RemoveCourse } from "./RemoveCourse";
 
 
 export function SemesterTable({semesterName, creditLimit, allCourses, setAllCourses}: {
@@ -10,34 +12,34 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     const courses: Course[] = allCourses[semesterName];
 
-    // Temporary function
-    function addCourse(): void {
-        setAllCourses(allCourses);
-        console.log("adding course");
-    }
-
-    return <Container>
-        <h4>
-            {semesterName}, credit limit: {creditLimit}
-        </h4>
-        
-        <Table>
-            <thead>
-                <tr>
-                    <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th>
-                </tr>
-            </thead>
-            <tbody>
-                { courses.map((course: Course) => {
-                    return <tr key={course.id}>
-                        <td>{course.id}</td>
-                        <td>{course.name}</td>
-                        <td>{course.description}</td>
-                        <td>{course.prereqs}</td>
-                    </tr>;
-                })}
-            </tbody>
-        </Table>
-        <Button onClick={addCourse}>temp add course</Button>
+    return <Container className = "m-2 p-4 border border-primary">
+        <Row>
+            <h4>
+                {semesterName}, Credit Limit: {creditLimit}
+            </h4>
+            
+            <Table>
+                <thead>
+                    <tr>
+                        {/* <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th> */}
+                        <th>ID</th><th>Name</th><th>Prereqs</th>                    
+                    </tr>
+                </thead>
+                <tbody>
+                    { courses.map((course: Course) => {
+                        return <tr key={course.id}>
+                            <td>{course.id}</td>
+                            <td>{course.name.replace(course.id + " - ","")}</td>
+                            {/* <td>{course.description}</td> */}
+                            <td>{course.prereqs}</td>
+                        </tr>;
+                    })}
+                </tbody>
+            </Table>
+        </Row>
+        <Row>
+            <Col><AddCourse allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></AddCourse></Col>
+            <Col><RemoveCourse allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></RemoveCourse></Col>
+        </Row>
     </Container>;
 }
