@@ -12,6 +12,8 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     const courses: Course[] = allCourses[semesterName];
 
+
+
     return <Container className = "m-2 p-4 border border-primary">
         <Row>
             <Col xs={7}>
@@ -20,7 +22,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                 </h4>
             </Col>
             <Col className="text-end">
-                <Button variant="danger">Remove Semester</Button>
+                <Button variant="danger" size="sm">Remove Semester</Button>
             </Col>
         </Row>
         <Row>
