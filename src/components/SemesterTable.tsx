@@ -1,5 +1,5 @@
 import { Course } from "../interfaces/Course";
-import React, { Container, Table, Row, Col } from "react-bootstrap";
+import React, { Button, Container, Table, Row, Col } from "react-bootstrap";
 import { AddCourse } from "./AddCourse";
 import { RemoveCourse } from "./RemoveCourse";
 
@@ -14,10 +14,16 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     return <Container className = "m-2 p-4 border border-primary">
         <Row>
-            <h4>
-                {semesterName}, Credit Limit: {creditLimit}
-            </h4>
-            
+            <Col xs={7}>
+                <h4>
+                    {semesterName}, Credit Limit: {creditLimit}
+                </h4>
+            </Col>
+            <Col className="text-end">
+                <Button variant="danger">Remove Semester</Button>
+            </Col>
+        </Row>
+        <Row>
             <Table>
                 <thead>
                     <tr>
