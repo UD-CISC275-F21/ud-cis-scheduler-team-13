@@ -11,7 +11,7 @@ export function Footer(): JSX.Element {
     return(
         //Imported fixed-bottom from react-bootstrap
         //https://stackoverflow.com/questions/40515142/how-to-make-a-sticky-footer-in-react
-        <div className="fixed-bottom">
+        <div className="sticky-bottom">
             <div className="udFooter">
                 <div className="udFooter-container">
                     <div className="udFooterHeader">
