@@ -216,3 +216,7 @@
 .addSemesterH3 {
   text-align: center;
 }
+
+.Warning {
+  color: red;
+}
