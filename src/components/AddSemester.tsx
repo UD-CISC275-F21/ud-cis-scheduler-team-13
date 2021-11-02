@@ -70,7 +70,7 @@ export function AddSemester({allCourses, setAllCourses}: {
                         return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
                     })}
                 </DropdownButton>
-                {sameSemWarn && <p className="Warning">
+                {sameSemWarn && <p className="sameSemWarning">
                     That semester is already in the plan
                 </p>}
             </Col>
