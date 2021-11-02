@@ -216,3 +216,7 @@
 .addSemesterH3 {
   text-align: center;
 }
+
+.sameSemWarning {
+  color: red;
+}
