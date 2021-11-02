@@ -71,9 +71,9 @@ export function AddSemester({allCourses, setAllCourses}: {
                         return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
                     })}
                 </DropdownButton>
-                {sameSemWarn && <Alert variant="danger" onClose={() => setSameSemWarn(false)} dismissible>
-                    <Alert.Heading>That semester is already in the plan</Alert.Heading>
-                </Alert>}
+                {sameSemWarn && <p className="Warning">
+                    That semester is already in the plan
+                </p>}
             </Col>
             <Col>
                 <Button type="submit" onClick={addSemester}>Submit</Button>
