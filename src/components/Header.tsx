@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../img/logo-udel.png";
+import { Link } from "react-router-dom";
 
 export function Header(): JSX.Element {
     return(
@@ -18,7 +19,7 @@ export function Header(): JSX.Element {
                 <div className="udHeader-collegeBar">
                     <div className="udHeader-collegeWrapper">
                         <div className="udHeader-collegeName">
-                            <a href="/">UD CIS Scheduler</a>
+                            <Link to="/ud-cis-scheduler-team-13/">UD CIS Scheduler</Link>
                         </div>
                     </div>
                 </div>
