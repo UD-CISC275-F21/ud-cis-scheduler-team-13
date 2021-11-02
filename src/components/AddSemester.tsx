@@ -28,8 +28,17 @@ export function AddSemester({allCourses, setAllCourses}: {
         setAllCourses(newAllCourses);
     }
 
-    // Un-hardcode this later lol
-    const years = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028"];
+    // Make a string array of years around the current year
+    function makeYears(): string[] {
+        const currYear = 2021;
+        const years: string[] = [];
+        for (let i = 0; i < 12; i++) {
+            years.push((currYear - 3 + i).toString() as string);
+        }
+        return years;
+    }
+
+    const years = makeYears();
 
     return <Container className="m-3 p-3 border border-primary">
         <Row>
