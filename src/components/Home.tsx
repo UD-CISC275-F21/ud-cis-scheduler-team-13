@@ -19,7 +19,7 @@ function Home(): JSX.Element {
                     To Continue to the Scheduler, press the button below.
                 </p>
                 <div className="initial-schedule">
-                    <Link to="/scheduler">
+                    <Link to="/ud-cis-scheduler-team-13/scheduler">
                         <Button>Create New Schedule</Button>
                     </Link>
                 </div>

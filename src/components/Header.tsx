@@ -19,7 +19,7 @@ export function Header(): JSX.Element {
                 <div className="udHeader-collegeBar">
                     <div className="udHeader-collegeWrapper">
                         <div className="udHeader-collegeName">
-                            <Link to="/">UD CIS Scheduler</Link>
+                            <Link to="/ud-cis-scheduler-team-13/">UD CIS Scheduler</Link>
                         </div>
                     </div>
                 </div>
