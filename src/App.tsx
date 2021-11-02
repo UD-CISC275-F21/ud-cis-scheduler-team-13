@@ -9,6 +9,9 @@ import { Footer } from "./components/Footer";
 
 
 function App(): JSX.Element {
+
+    //TODO #30: Home won't appear as the main page with the intro message and button to procede to the scheduler itself
+    //so I need to work on a way to make this happen.
     return (
         <div className="App"> 
 
