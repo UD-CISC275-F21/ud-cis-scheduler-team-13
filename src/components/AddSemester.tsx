@@ -45,11 +45,6 @@ export function AddSemester({allCourses, setAllCourses}: {
                 </DropdownButton>
             </Col>
             <Col className="text-center">
-                {/* <Form>
-                    <Form.Group>
-                        <Form.Control type="year" placeholder="Year" onChange={yearChange}></Form.Control>
-                    </Form.Group>
-                </Form> */}
                 <DropdownButton id="dropdown-year" title={year} onSelect={yearChange}>
                     {years.map((y: string) => {
                         return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
