@@ -1,5 +1,5 @@
 import { useState } from "react";
-import React, { Container, Row, Dropdown, DropdownButton, Button, Col, Alert } from "react-bootstrap";
+import React, { Container, Row, Dropdown, DropdownButton, Button, Col } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 
 export function AddSemester({allCourses, setAllCourses}: {
