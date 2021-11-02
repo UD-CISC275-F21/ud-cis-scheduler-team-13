@@ -1,5 +1,5 @@
 import { useState } from "react";
-import React, { Container, Row, Dropdown, DropdownButton, Button, Col } from "react-bootstrap";
+import React, { Container, Row, Dropdown, DropdownButton, Button, Col, Alert } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 
 export function AddSemester({allCourses, setAllCourses}: {
@@ -8,6 +8,7 @@ export function AddSemester({allCourses, setAllCourses}: {
 
     const [dropdownSeason, setDropdownSeason] = useState<string>("Fall");
     const [year, setYear] = useState<string>("2022");
+    const [sameSemWarn, setSameSemWarn] = useState<boolean>(false);
 
     function handleSeasonSelect(key: string | null): void {
         if (key !== null) {
@@ -22,8 +23,17 @@ export function AddSemester({allCourses, setAllCourses}: {
     }
 
     function addSemester(): void {
-        const semesterName: string = dropdownSeason + year;
+        const semesterName: string = dropdownSeason + year.toString();
         const newAllCourses: Record<string, Course[]> = {...allCourses};
+
+        // Check if semester already exists
+        if (semesterName in allCourses) {
+            // Semester already exists, don't add
+            // Tell user
+            setSameSemWarn(true);
+            return;
+        }
+
         newAllCourses[semesterName] = [];
         setAllCourses(newAllCourses);
     }
@@ -59,6 +69,9 @@ export function AddSemester({allCourses, setAllCourses}: {
                         return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
                     })}
                 </DropdownButton>
+                {sameSemWarn && <Alert variant="danger" onClose={() => setSameSemWarn(false)} dismissible>
+                    <Alert.Heading>That semester is already in the plan</Alert.Heading>
+                </Alert>}
             </Col>
             <Col>
                 <Button type="submit" onClick={addSemester}>Submit</Button>
