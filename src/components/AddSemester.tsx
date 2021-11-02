@@ -26,6 +26,8 @@ export function AddSemester({allCourses, setAllCourses}: {
         const semesterName: string = dropdownSeason + year.toString();
         const newAllCourses: Record<string, Course[]> = {...allCourses};
 
+        setSameSemWarn(false);
+
         // Check if semester already exists
         if (semesterName in allCourses) {
             // Semester already exists, don't add
