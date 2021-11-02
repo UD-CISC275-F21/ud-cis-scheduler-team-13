@@ -8,8 +8,8 @@ import Home from "./Home";
 function Redirect(): JSX.Element {
     return(
         <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/scheduler" component={Scheduler} />
+            <Route exact path="/ud-cis-scheduler-team-13/" component={Home} />
+            <Route path="/ud-cis-scheduler-team-13/scheduler" component={Scheduler} />
         </Switch>
     );
 }
