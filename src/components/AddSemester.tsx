@@ -30,8 +30,7 @@ export function AddSemester({allCourses, setAllCourses}: {
 
         // Check if semester already exists
         if (semesterName in allCourses) {
-            // Semester already exists, don't add
-            // Tell user
+            // Semester already exists, don't add and tell user
             setSameSemWarn(true);
             return;
         }
