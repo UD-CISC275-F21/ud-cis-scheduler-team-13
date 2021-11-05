@@ -20,7 +20,7 @@ export default function RemoveCourse({allCourses, setAllCourses}: {
         for (let i = 0; i < semNames.length; i++) {
             courseSubmit(semNames[i]);
         }        
-    }
+    };
 
     return(
         <div>
