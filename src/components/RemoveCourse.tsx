@@ -1,6 +1,6 @@
 import { Course } from "../interfaces/Course";
-import React, { Button, Form, Modal } from "react-bootstrap";
-import { useState, ChangeEvent } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
+import React, { useState, ChangeEvent } from "react";
 
 export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
     allCourses: Record<string, Course[]>,
@@ -12,6 +12,15 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        console.log("Function ran");
+        if (event.key === "Enter") {
+            console.log("Enter key was pressed");
+            courseSubmit();
+            event.preventDefault();
+        }
+    };
 
     function courseChange(e: ChangeEvent<HTMLInputElement>): void {
         setInputCourse(e.target.value);
@@ -42,7 +51,7 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
                 <Modal.Body>
                     <Form>
                         <Form.Label>Enter Course</Form.Label>
-                        <Form.Control type="Course" placeholder="Enter Course Name" onChange={courseChange} />
+                        <Form.Control type="Course" placeholder="Enter Course Name" onChange={courseChange} onKeyPress={keyDownHandler}/>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
