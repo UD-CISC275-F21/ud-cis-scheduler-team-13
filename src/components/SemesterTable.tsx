@@ -2,6 +2,7 @@ import { Course } from "../interfaces/Course";
 import React, { Button, Container, Table, Row, Col } from "react-bootstrap";
 import { AddCourse } from "./AddCourse";
 import { RemoveCourse } from "./RemoveCourse";
+import ClearTable from "./ClearTable";
 
 
 export function SemesterTable({semesterName, creditLimit, allCourses, setAllCourses}: {
@@ -57,6 +58,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         <Row>
             <Col><AddCourse allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></AddCourse></Col>
             <Col><RemoveCourse allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></RemoveCourse></Col>
+            <Col><ClearTable allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></ClearTable></Col>
         </Row>
     </Container>;
 }
