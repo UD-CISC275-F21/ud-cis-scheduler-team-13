@@ -1,7 +1,7 @@
 import { Course } from "../interfaces/Course";
 import React, { Button } from "react-bootstrap";
 
-export default function RemoveCourse({allCourses, setAllCourses}: {
+export function ClearAllTables({allCourses, setAllCourses}: {
     allCourses: Record<string, Course[]>,
     setAllCourses: (c: Record<string, Course[]>)=>void}): JSX.Element {
 
