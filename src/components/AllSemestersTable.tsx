@@ -3,6 +3,7 @@ import React, { Container, Row, Col } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 import { useState } from "react";
 import { AddSemester } from "./AddSemester";
+import { ClearAllTables } from "./ClearAllTables";
 import catalog from "../assets/Catalog.json";
 
 export function AllSemestersTable(): JSX.Element {
@@ -87,6 +88,7 @@ export function AllSemestersTable(): JSX.Element {
     const partitionedKeys = partitionSemesters(allCourses, 2);
 
     return <Container>
+        <ClearAllTables allCourses={allCourses} setAllCourses={setAllCourses} />
         <AddSemester allCourses={allCourses} setAllCourses={setAllCourses}></AddSemester>
         {partitionedKeys.map((nKeys: string[]) => {
             return <Row key={nKeys[1]}>
