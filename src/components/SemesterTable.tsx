@@ -15,7 +15,8 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     function removeSemester(): void {
         const copyCourses = {...allCourses};
-        for (let i = 0; i < copyCourses[semesterName].length; i++) {
+        const len: number = copyCourses[semesterName].length;
+        for (let i = 0; i < len; i++) {
             copyCourses.Remaining.push(copyCourses[semesterName][0]);
             copyCourses[semesterName].splice(0,1);
         }
