@@ -3,6 +3,7 @@ import React, { Button, Container, Table, Row, Col } from "react-bootstrap";
 import { AddCourse } from "./AddCourse";
 import { RemoveCourse } from "./RemoveCourse";
 import ClearTable from "./ClearTable";
+import { EditCourse } from "./EditCourse";
 
 
 export function SemesterTable({semesterName, creditLimit, allCourses, setAllCourses}: {
@@ -39,8 +40,8 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
             <Table>
                 <thead>
                     <tr>
-                        {/* <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th> */}
-                        <th>ID</th><th>Name</th><th>Prereqs</th>                    
+                        <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th><th></th>
+                        {/*<th>ID</th><th>Name</th><th>Prereqs</th><th></th>     */}                
                     </tr>
                 </thead>
                 <tbody>
@@ -48,8 +49,9 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                         return <tr key={course.id}>
                             <td>{course.id}</td>
                             <td>{course.name.replace(course.id + " - ","")}</td>
-                            {/* <td>{course.description}</td> */}
+                            <td>{course.description}</td>
                             <td>{course.prereqs}</td>
+                            <EditCourse course={course} allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></EditCourse>
                         </tr>;
                     })}
                 </tbody>
