@@ -3,6 +3,7 @@ import React, { Container, Row, Col } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 import { useState } from "react";
 import { AddSemester } from "./AddSemester";
+import { ClearAllTables } from "./ClearAllTables";
 import catalog from "../assets/Catalog.json";
 
 export function AllSemestersTable(): JSX.Element {
@@ -98,5 +99,6 @@ export function AllSemestersTable(): JSX.Element {
                 })}
             </Row>;
         })}
+        <ClearAllTables allCourses={allCourses} setAllCourses={setAllCourses} />
     </Container>;
 }

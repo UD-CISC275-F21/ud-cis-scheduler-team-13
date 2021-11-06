@@ -2,7 +2,8 @@ import { Course } from "../interfaces/Course";
 import React, { Button, Container, Table, Row, Col } from "react-bootstrap";
 import { AddCourse } from "./AddCourse";
 import { RemoveCourse } from "./RemoveCourse";
-import { EditCourse } from "./EditNameDescription";
+import ClearTable from "./ClearTable";
+import { EditCourse } from "./EditCourse";
 
 
 export function SemesterTable({semesterName, creditLimit, allCourses, setAllCourses}: {
@@ -15,7 +16,8 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     function removeSemester(): void {
         const copyCourses = {...allCourses};
-        for (let i = 0; i < copyCourses[semesterName].length; i++) {
+        const len: number = copyCourses[semesterName].length;
+        for (let i = 0; i < len; i++) {
             copyCourses.Remaining.push(copyCourses[semesterName][0]);
             copyCourses[semesterName].splice(0,1);
         }
@@ -38,8 +40,8 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
             <Table>
                 <thead>
                     <tr>
-                        {/* <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th> */}
-                        <th>ID</th><th>Name</th><th>Prereqs</th>                    
+                        <th>ID</th><th>Name</th><th>Description</th><th>Prereqs</th><th></th>
+                        {/*<th>ID</th><th>Name</th><th>Prereqs</th><th></th>     */}                
                     </tr>
                 </thead>
                 <tbody>
@@ -47,9 +49,9 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                         return <tr key={course.id}>
                             <td>{course.id}</td>
                             <td>{course.name.replace(course.id + " - ","")}</td>
-                            {<td>{course.description}</td>}
+                            <td>{course.description}</td>
                             <td>{course.prereqs}</td>
-                            <EditCourse course={course} allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName} ></EditCourse>
+                            <EditCourse course={course} allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></EditCourse>
                         </tr>;
                     })}
                 </tbody>
@@ -58,6 +60,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         <Row>
             <Col><AddCourse allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></AddCourse></Col>
             <Col><RemoveCourse allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></RemoveCourse></Col>
+            <Col><ClearTable allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></ClearTable></Col>
         </Row>
     </Container>;
 }
