@@ -14,9 +14,7 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
     const handleShow = () => setShow(true);
 
     const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        console.log("Function ran");
         if (event.key === "Enter") {
-            console.log("Enter key was pressed");
             courseSubmit();
             event.preventDefault();
         }
