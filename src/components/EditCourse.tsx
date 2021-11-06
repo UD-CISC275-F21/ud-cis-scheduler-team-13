@@ -54,11 +54,11 @@ export function EditCourse({course, allCourses, setAllCourses, semesterName}: {
                 <Modal.Body>
                     <Form>
                         <Form.Label>Edit name of course</Form.Label>
-                        <Form.Control value={nameCourse} type="Course" placeholder="Enter Course Name" onChange={nameChange} onKeyPress={keyDownHandler}/>
+                        <Form.Control value={nameCourse} type="Course" placeholder="Enter New Name" onChange={nameChange} onKeyPress={keyDownHandler}/>
                     </Form>
                     <Form>
                         <Form.Label>Edit description of course</Form.Label>
-                        <Form.Control value={descriptionCourse} type="Course" placeholder="Enter Course Name" onChange={descriptionChange} onKeyPress={keyDownHandler}/>
+                        <Form.Control value={descriptionCourse} type="Course" placeholder="Enter Description" onChange={descriptionChange} onKeyPress={keyDownHandler}/>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
