@@ -98,8 +98,8 @@ export function AllSemestersTable(): JSX.Element {
                 })}
             </Row>;
         })}
-        <Row>
-            <Col>
+        <Row className="m-3">
+            <Col className="text-end">
                 <ClearAllTables allCourses={allCourses} setAllCourses={setAllCourses} />
             </Col>
             <Col>
