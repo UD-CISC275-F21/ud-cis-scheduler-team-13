@@ -16,8 +16,8 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     const defaultOpened: Record<string, boolean> = {};
     const courses: Course[] = allCourses[semesterName];
 
-    for (const course in courses) {
-        defaultOpened[course.id] = false;
+    for (const courseID in courses) {
+        defaultOpened[courseID] = false;
     }
 
     const [opened, setOpened] = useState<Record<string, boolean>>(defaultOpened);
@@ -65,12 +65,10 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                             <td>{course.name.replace(course.id + " - ","")}</td>
                             <td>
                                 <Button onClick={() => toggleOpen(course.id)} >
-                                    click
+                                    Show description
                                 </Button>
-                            </td>
-                            <td>
                                 <Collapse in={opened[course.id]}>
-                                    {course.description}
+                                    {course && <p>{course.description}</p>}
                                 </Collapse>
                             </td>
                             <td>{course.prereqs}</td>
