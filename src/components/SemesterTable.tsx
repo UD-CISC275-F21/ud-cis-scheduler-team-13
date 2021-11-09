@@ -1,5 +1,6 @@
 import { Course } from "../interfaces/Course";
-import React, { Button, Container, Table, Row, Col } from "react-bootstrap";
+import React, { Button, Container, Table, Row, Col, Collapse } from "react-bootstrap";
+import { useState } from "react";
 import { AddCourse } from "./AddCourse";
 import { RemoveCourse } from "./RemoveCourse";
 import ClearTable from "./ClearTable";
@@ -12,7 +13,14 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         allCourses: Record<string, Course[]>
         setAllCourses: (c: Record<string, Course[]>)=>void}): JSX.Element {
 
+    const defaultOpened: Record<string, boolean> = {};
     const courses: Course[] = allCourses[semesterName];
+
+    for (const course in courses) {
+        defaultOpened[course.id] = false;
+    }
+
+    const [opened, setOpened] = useState<Record<string, boolean>>(defaultOpened);
 
     function removeSemester(): void {
         const copyCourses = {...allCourses};
@@ -23,6 +31,12 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         }
         delete copyCourses[semesterName];
         setAllCourses(copyCourses);
+    }
+
+    function toggleOpen(id: string) {
+        const copyOpened = {...opened};
+        copyOpened[id] = !copyOpened[id];
+        setOpened(copyOpened);
     }
 
     return <Container className = "m-2 p-4 border border-primary">
@@ -49,7 +63,16 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                         return <tr key={course.id}>
                             <td>{course.id}</td>
                             <td>{course.name.replace(course.id + " - ","")}</td>
-                            <td>{course.description}</td>
+                            <td>
+                                <Button onClick={() => toggleOpen(course.id)} >
+                                    click
+                                </Button>
+                            </td>
+                            <td>
+                                <Collapse in={opened[course.id]}>
+                                    {course.description}
+                                </Collapse>
+                            </td>
                             <td>{course.prereqs}</td>
                             <EditCourse course={course} allCourses={allCourses} setAllCourses={setAllCourses} semesterName={semesterName}></EditCourse>
                         </tr>;
