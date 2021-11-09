@@ -36,9 +36,7 @@ export function AllSemestersTable(): JSX.Element {
         }
 
         // Sort chronologically
-        console.log(keys);
         keys.sort(compareSemesters);
-        console.log(keys);
 
         for (let i = 0; i < keys.length; i += n) {
             partitioned[partitioned.length] = keys.slice(i, i+n);
