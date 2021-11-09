@@ -4,6 +4,7 @@ import { Course } from "../interfaces/Course";
 import { useState } from "react";
 import { AddSemester } from "./AddSemester";
 import { ClearAllTables } from "./ClearAllTables";
+import { ClearAllSemesters } from "./ClearAllSemesters";
 import catalog from "../assets/Catalog.json";
 
 export function AllSemestersTable(): JSX.Element {
@@ -99,6 +100,13 @@ export function AllSemestersTable(): JSX.Element {
                 })}
             </Row>;
         })}
-        <ClearAllTables allCourses={allCourses} setAllCourses={setAllCourses} />
+        <Row>
+            <Col>
+                <ClearAllTables allCourses={allCourses} setAllCourses={setAllCourses} />
+            </Col>
+            <Col>
+                <ClearAllSemesters allCourses={allCourses} setAllCourses={setAllCourses} />
+            </Col>
+        </Row>
     </Container>;
 }
