@@ -18,7 +18,8 @@ export function ClearAllSemesters({allCourses, setAllCourses}: {
     function deleteSemesters() {
         const copyCourses = {...allCourses};
         const semNames: string[] = Object.keys(copyCourses);
-        for (let i = 0; i < semNames.length; i++) {            
+        for (let i = 0; i < semNames.length; i++) {      
+            // iterate through semester names and delete      
             if (semNames[i] !== "Remaining") {
                 delete copyCourses[semNames[i]];
             }            
