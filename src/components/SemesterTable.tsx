@@ -64,7 +64,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                             <td>{course.id}</td>
                             <td>{course.name.replace(course.id + " - ","")}</td>
                             <td>
-                                <Button onClick={() => toggleOpen(course.id)} >
+                                <Button onClick={() => toggleOpen(course.id)} size="sm" >
                                     Show description
                                 </Button>
                                 <Collapse in={opened[course.id]}>
