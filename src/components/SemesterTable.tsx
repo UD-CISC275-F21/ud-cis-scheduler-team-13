@@ -31,7 +31,6 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
             if (!Object.keys(copyOpened).includes(courseIDs[i])) {
                 // if opened does not include a course it should
                 copyOpened[courseIDs[i]] = false;
-                console.log("added course to opened");
                 needUpdate = true;
             }
         } 
@@ -43,7 +42,6 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
             if (!courseIDs.includes(openedKeys[i])) {
                 // if opened has a course it should not have
                 delete copyOpened[openedKeys[i]];
-                console.log("removed course from opened");
                 needUpdate = true;
             }
         }
