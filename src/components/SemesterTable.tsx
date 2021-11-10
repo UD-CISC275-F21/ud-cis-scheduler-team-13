@@ -19,7 +19,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     const [opened, setOpened] = useState<Record<string, boolean>>(defaultOpened);
 
     useEffect(()=>{
-        const len: number = courses.length;
+        let len: number = courses.length;
         const copyOpened = {...opened};
         let needUpdate = false;
         for (let i = 0; i < len; i++) {
@@ -29,6 +29,17 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
                 needUpdate = true;
             }
         } 
+
+        const openedKeys: string[] = Object.keys(copyOpened);
+        len = openedKeys.length;
+        const courseIDs: string[] = courses.map(c => c.id);
+        for (let i = 0; i < len; i++) {
+            if (!courseIDs.includes(openedKeys[i])) {
+                delete copyOpened[openedKeys[i]];
+                needUpdate = true;
+            }
+        }
+
         if (needUpdate) {
             setOpened(copyOpened);
         }        
