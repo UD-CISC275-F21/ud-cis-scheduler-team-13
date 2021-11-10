@@ -1,6 +1,6 @@
 import { Course } from "../interfaces/Course";
 import React, { Button, Container, Table, Row, Col, Collapse } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddCourse } from "./AddCourse";
 import { RemoveCourse } from "./RemoveCourse";
 import ClearTable from "./ClearTable";
@@ -16,11 +16,23 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     const defaultOpened: Record<string, boolean> = {};
     const courses: Course[] = allCourses[semesterName];
 
-    for (const courseID in courses) {
-        defaultOpened[courseID] = false;
-    }
-
     const [opened, setOpened] = useState<Record<string, boolean>>(defaultOpened);
+
+    useEffect(()=>{
+        const len: number = courses.length;
+        const copyOpened = {...opened};
+        let needUpdate = false;
+        for (let i = 0; i < len; i++) {
+            if (!Object.keys(copyOpened).includes(courses[i].id)) {
+                copyOpened[courses[i].id] = false;
+                console.log("here");
+                needUpdate = true;
+            }
+        } 
+        if (needUpdate) {
+            setOpened(copyOpened);
+        }        
+    });
 
     function removeSemester(): void {
         const copyCourses = {...allCourses};
@@ -35,7 +47,11 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     function toggleOpen(id: string) {
         const copyOpened = {...opened};
-        copyOpened[id] = !copyOpened[id];
+        if (Object.keys(copyOpened).includes(id)) {
+            copyOpened[id] = !copyOpened[id];
+        } else {
+            copyOpened[id] = true;
+        }
         setOpened(copyOpened);
     }
 
