@@ -1,6 +1,6 @@
 import { Course } from "../interfaces/Course";
 import React, { Button, Container, Table, Row, Col, Collapse } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddCourse } from "./AddCourse";
 import { RemoveCourse } from "./RemoveCourse";
 import ClearTable from "./ClearTable";
@@ -16,11 +16,42 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     const defaultOpened: Record<string, boolean> = {};
     const courses: Course[] = allCourses[semesterName];
 
-    for (const courseID in courses) {
-        defaultOpened[courseID] = false;
-    }
-
     const [opened, setOpened] = useState<Record<string, boolean>>(defaultOpened);
+
+    useEffect(()=>{
+
+        // Update courses (keys) in opened state for course descriptions
+        const copyOpened = {...opened};
+        let needUpdate = false;
+        const courseIDs: string[] = courses.map(c => c.id);
+
+        // Adding a course to opened 
+        let len: number = courses.length;
+        for (let i = 0; i < len; i++) {
+            if (!Object.keys(copyOpened).includes(courseIDs[i])) {
+                // if opened does not include a course it should
+                copyOpened[courseIDs[i]] = false;
+                console.log("added course to opened");
+                needUpdate = true;
+            }
+        } 
+
+        // Removing a course from opened
+        const openedKeys: string[] = Object.keys(copyOpened);
+        len = openedKeys.length;
+        for (let i = 0; i < len; i++) {
+            if (!courseIDs.includes(openedKeys[i])) {
+                // if opened has a course it should not have
+                delete copyOpened[openedKeys[i]];
+                console.log("removed course from opened");
+                needUpdate = true;
+            }
+        }
+
+        if (needUpdate) {
+            setOpened(copyOpened);
+        }        
+    });
 
     function removeSemester(): void {
         const copyCourses = {...allCourses};
@@ -35,7 +66,11 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
 
     function toggleOpen(id: string) {
         const copyOpened = {...opened};
-        copyOpened[id] = !copyOpened[id];
+        if (Object.keys(copyOpened).includes(id)) {
+            copyOpened[id] = !copyOpened[id];
+        } else {
+            copyOpened[id] = true;
+        }
         setOpened(copyOpened);
     }
 
