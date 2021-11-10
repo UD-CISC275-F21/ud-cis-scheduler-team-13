@@ -19,23 +19,31 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
     const [opened, setOpened] = useState<Record<string, boolean>>(defaultOpened);
 
     useEffect(()=>{
-        let len: number = courses.length;
+
+        // Update courses (keys) in opened state for course descriptions
         const copyOpened = {...opened};
         let needUpdate = false;
+        const courseIDs: string[] = courses.map(c => c.id);
+
+        // Adding a course to opened 
+        let len: number = courses.length;
         for (let i = 0; i < len; i++) {
-            if (!Object.keys(copyOpened).includes(courses[i].id)) {
-                copyOpened[courses[i].id] = false;
-                console.log("here");
+            if (!Object.keys(copyOpened).includes(courseIDs[i])) {
+                // if opened does not include a course it should
+                copyOpened[courseIDs[i]] = false;
+                console.log("added course to opened");
                 needUpdate = true;
             }
         } 
 
+        // Removing a course from opened
         const openedKeys: string[] = Object.keys(copyOpened);
         len = openedKeys.length;
-        const courseIDs: string[] = courses.map(c => c.id);
         for (let i = 0; i < len; i++) {
             if (!courseIDs.includes(openedKeys[i])) {
+                // if opened has a course it should not have
                 delete copyOpened[openedKeys[i]];
+                console.log("removed course from opened");
                 needUpdate = true;
             }
         }
