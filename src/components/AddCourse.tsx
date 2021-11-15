@@ -1,6 +1,10 @@
 import { Course } from "../interfaces/Course";
 import { Button, Form, Modal } from "react-bootstrap";
 import React, { useState, ChangeEvent } from "react";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import Catalog from "../assets/Catalog.json";
+
 
 export function AddCourse({allCourses, setAllCourses, semesterName}: {
     allCourses: Record<string, Course[]>,
@@ -48,8 +52,25 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Label>Enter Course</Form.Label>
-                        <Form.Control type="Course" placeholder="Enter Course Name" onChange={courseChange} onKeyPress={keyDownHandler}/>
+                        <Form.Label>
+                            <Autocomplete
+                                sx={{ width: 300 }}
+                                options={Catalog}
+                                autoHighlight
+                                getOptionLabel={(option) => option.name}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Enter Course Name"
+                                        inputProps={{
+                                            ...params.inputProps,
+                                            autoComplete: "new-password", // disable autocomplete and autofill
+                                        }}
+                                    />
+                                )}
+                            />
+                        </Form.Label>
+                        <Form.Control type="Course" onChange={courseChange} onKeyPress={keyDownHandler}/>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
