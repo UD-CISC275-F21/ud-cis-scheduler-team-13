@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
 
@@ -111,4 +111,34 @@ test("add course", async () => {
     userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
 
     expect(screen.getByText(courseStr)).toBeInTheDocument();
+});
+
+test("remove all courses in semester", async () => {
+    goToScheduler();
+
+    const courseStr = "CISC 101";
+
+    expect(screen.getByText(courseStr)).toBeInTheDocument();
+
+    const semester = screen.getByText(courseStr).parentNode.parentNode.parentNode.parentNode.parentNode;
+    const remAllCoursesButton = within(semester as HTMLElement).getByRole("button", {name: "Remove All Courses"});
+    userEvent.click(remAllCoursesButton);
+
+    expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
+});
+
+test("edit course", () => {
+    goToScheduler();
+
+    const courseStr = "CISC 101";
+
+    const semester = screen.getByText(courseStr).parentNode.parentNode.parentNode.parentNode.parentNode;
+    const editCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Edit"});
+    userEvent.click(editCourseButton);
+
+    const modal = screen.getByText("Edit Course Information").parentNode.parentNode;
+    const newName = "NEW NAME";
+    userEvent.type(within(modal as HTMLElement).getByRole("textbox", {name: "Enter New Name"}), "{selectall}{backspace}"+newName+"{enter}");
+
+    expect(screen.getByText(newName)).toBeInTheDocument();
 });
