@@ -72,7 +72,7 @@ export function SemesterTable({semesterName, creditLimit, allCourses, setAllCour
         setOpened(copyOpened);
     }
 
-    return <Container className = "m-2 p-4 border border-primary">
+    return <Container className = "m-2 p-4 border border-primary" role="table" aria-label={semesterName}>
         <Row>
             <Col xs={7}>
                 <h4>
