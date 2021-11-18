@@ -126,19 +126,25 @@ test("add course", () => {
     expect(screen.getByText(courseStr)).toBeInTheDocument();
 });
 
-test("remove all courses in semester", () => {
+test("remove all courses in semester", async () => {
     goToScheduler();
 
-    const courseStr = "CISC 101";
+    const courses: string[] = ["CISC 275", "CISC 476", "DANC 312"];
     const semesterStr = "Fall2020";
 
-    expect(screen.getByText(courseStr)).toBeInTheDocument();
+    for (let i = 0; i < courses.length; i++) {
+        addCourse(semesterStr, courses[i]);
+        await screen.findByText(courses[i]);
+        expect(screen.getByText(courses[i])).toBeInTheDocument();
+    }
 
     const semester = screen.getByRole("table", {name: semesterStr});
     const remAllCoursesButton = within(semester as HTMLElement).getByRole("button", {name: "Remove All Courses"});
     userEvent.click(remAllCoursesButton);
 
-    expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
+    for (let i = 0; i < courses.length; i++) {
+        expect(screen.queryByText(courses[i])).not.toBeInTheDocument();
+    }
 });
 
 test("edit course", () => {
