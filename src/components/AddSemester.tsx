@@ -64,7 +64,7 @@ export function AddSemester({allCourses, setAllCourses}: {
                     <Dropdown.Item eventKey="Summer">Summer</Dropdown.Item>
                 </DropdownButton>
             </Col>
-            <Col className="text-center">
+            <Col className="text-center" md="auto">
                 <DropdownButton id="dropdown-year" title={year} onSelect={yearChange}>
                     {years.map((y: string) => {
                         return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;

@@ -4,17 +4,31 @@ import { Course } from "../interfaces/Course";
 import { useState } from "react";
 import { AddSemester } from "./AddSemester";
 import { ClearAllTables } from "./ClearAllTables";
+import { ClearAllSemesters } from "./ClearAllSemesters";
 import catalog from "../assets/Catalog.json";
 
 export function AllSemestersTable(): JSX.Element {
+
+    // https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects
+    // User Eydrian
+    // Remove duplicate courses
+    let fixedCatalog: Course[] = catalog;
+    fixedCatalog = fixedCatalog.filter((element, index, array) => {
+        const foundIndex = array.findIndex((c) => {
+            return c.id === element.id;
+        });
+        return index === foundIndex;
+    });
+
     // Take list of courses and sort them into default semesters,
     // or maybe leave semesters blank by default
     const defaultCourses: Record<string, Course[]> = {
-        "Fall2020": [catalog[0] as Course],
-        "Spring2021": [catalog[1] as Course],
-        "Summer2021": [catalog[2] as Course],
-        "Winter2021": [catalog[3] as Course],
-        "Remaining": catalog.slice(4) as Course[]};
+        "Fall2020": [fixedCatalog[0] as Course],
+        "Spring2021": [fixedCatalog[1] as Course],
+        "Summer2021": [fixedCatalog[2] as Course],
+        "Winter2021": [fixedCatalog[3] as Course],
+        "Remaining": fixedCatalog.slice(4) as Course[]};
+
 
     // Hook to track courses across semesters
     // Pass this into SemesterTable
@@ -35,9 +49,7 @@ export function AllSemestersTable(): JSX.Element {
         }
 
         // Sort chronologically
-        console.log(keys);
         keys.sort(compareSemesters);
-        console.log(keys);
 
         for (let i = 0; i < keys.length; i += n) {
             partitioned[partitioned.length] = keys.slice(i, i+n);
@@ -99,6 +111,13 @@ export function AllSemestersTable(): JSX.Element {
                 })}
             </Row>;
         })}
-        <ClearAllTables allCourses={allCourses} setAllCourses={setAllCourses} />
+        <Row className="m-3">
+            <Col className="text-end">
+                <ClearAllTables allCourses={allCourses} setAllCourses={setAllCourses} />
+            </Col>
+            <Col>
+                <ClearAllSemesters allCourses={allCourses} setAllCourses={setAllCourses} />
+            </Col>
+        </Row>
     </Container>;
 }
