@@ -61,7 +61,7 @@ test("remove semester from plan", () => {
 
     const fall2020SemStr = "Fall2020, Credit Limit: 21";
 
-    const fall2020Semester = screen.getByText(fall2020SemStr).parentNode.parentNode;
+    const fall2020Semester = screen.getByRole("table", {name: "Fall2020"});
     const removeSemButton = within(fall2020Semester as HTMLElement).getByRole("button", {name: "Remove Semester"});
     
     userEvent.click(removeSemButton);
@@ -84,7 +84,7 @@ test("remove course", () => {
 
     const courseStr = "CISC 101";
 
-    const semester = screen.getByText(courseStr).parentNode.parentNode.parentNode.parentNode.parentNode;
+    const semester = screen.getByRole("table", {name: "Fall2020"});
     const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
     userEvent.click(remCourseButton);
 
@@ -128,9 +128,9 @@ test("remove all courses in semester", () => {
 test("edit course", () => {
     goToScheduler();
 
-    const courseStr = "CISC 101";
+    const semesterStr = "Fall2020";
 
-    const semester = screen.getByText(courseStr).parentNode.parentNode.parentNode.parentNode.parentNode;
+    const semester = screen.getByRole("table", {name: semesterStr});
     const editCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Edit"});
     userEvent.click(editCourseButton);
 
