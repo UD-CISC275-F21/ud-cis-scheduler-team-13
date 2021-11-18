@@ -102,7 +102,7 @@ export function AllSemestersTable(): JSX.Element {
     return <Container>
         <AddSemester allCourses={allCourses} setAllCourses={setAllCourses}></AddSemester>
         {partitionedKeys.map((nKeys: string[]) => {
-            return <Row key={nKeys[1]}>
+            return <Row key={nKeys[1]+nKeys[2]}>
                 {nKeys.map((key: string) => {
                     return <Col key={key}>
                         <SemesterTable semesterName={key} creditLimit={getCreditLim(key)} 
