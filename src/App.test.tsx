@@ -34,6 +34,24 @@ test("renders AddSemester", () => {
     expect(addHeader).toBeInTheDocument();
 });
 
-// test("add semester to plan", () => {
+test("add semester to plan", () => {
+    // This test relies on the default semesters
+    // (i.e. Fall2022 should not be on the scheduler by default)
+    // Also relies on the display of a semester
+    // Should be "SeasonYear" such as Fall2022
 
-// });
+    render(<App />);
+    goToScheduler();
+
+    // Check if Fall2022 semester is there, it shouldn't be
+    const missingSemester = screen.queryByText("Fall2022");
+    expect(missingSemester).not.toBeInTheDocument();
+
+    // Click submit to add the Fall2022 semester
+    const submitButton = screen.getByRole("button", {name: "Submit"});
+    userEvent.click(submitButton);
+    
+    // Expect Fall2022 to be there
+    const newSemester = screen.getByText("Fall2022, Credit Limit: 21");
+    expect(newSemester).toBeInTheDocument();
+});
