@@ -69,12 +69,25 @@ test("remove semester from plan", () => {
     expect(noFall2020).not.toBeInTheDocument();
 });
 
-test("render remove course modal", () => {
+test("render remove course modal", async () => {
     goToScheduler();
 
     const remCourseButton = screen.getAllByRole("button", {name: "Remove Course"})[0];
     userEvent.click(remCourseButton);
 
-    const modalHeader = screen.getByText("Type Name of Course Below:");
+    await screen.findByText("Type Name of Course Below:");
+    const modalHeader = screen.findByText("Type Name of Course Below:");
     expect(modalHeader).toBeInTheDocument();
 });
+
+// test("remove course", () => {
+//     goToScheduler();
+
+//     const courseStr = "CISC 101";
+
+//     const semester = screen.getByText(courseStr).parentNode;
+//     const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
+//     userEvent.click(remCourseButton);
+
+
+// });
