@@ -17,7 +17,7 @@ function addCourse(semesterName: string, courseID: string) {
     const addCourseButton = within(screen.getByRole("table", {name: semesterName})).getByRole("button", {name: "Add Course"});
     userEvent.click(addCourseButton);
 
-    userEvent.type(screen.getByRole("textbox"),courseID+"{enter}");
+    userEvent.type(screen.getByRole("textbox", {name: "addCourseTextbox"}),courseID+"{enter}");
 }
 
 test("renders UD CIS Scheduler text", () => {
@@ -100,13 +100,15 @@ test("render remove course modal", () => {
 test("remove course", () => {
     goToScheduler();
 
-    const courseStr = "CISC 101";
+    const courseStr = "CISC 275";
+    const semesterStr = "Fall2020";
+    addCourse(semesterStr,courseStr);
 
-    const semester = screen.getByRole("table", {name: "Fall2020"});
+    const semester = screen.getByRole("table", {name: semesterStr});
     const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
     userEvent.click(remCourseButton);
 
-    const enterCourse = screen.getByRole("textbox");
+    const enterCourse = screen.getByRole("textbox", {name: "removeCourseTextbox"});
     userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
 
     const course = screen.queryByText(courseStr);
