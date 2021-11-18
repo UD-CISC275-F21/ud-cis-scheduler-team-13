@@ -97,3 +97,18 @@ test("remove course", async () => {
     const course = screen.queryByText(courseStr);
     expect(course).not.toBeInTheDocument();
 });
+
+test("add course", async () => {
+    goToScheduler();
+
+    const courseStr = "CISC 275";
+
+    expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
+
+    userEvent.click(screen.getAllByRole("button", {name: "Add Course"})[0]);
+    await screen.findByText("Type Name of Course Below:");
+    const enterCourse = screen.getByRole("textbox");
+    userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
+
+    expect(screen.getByText(courseStr)).toBeInTheDocument();
+});
