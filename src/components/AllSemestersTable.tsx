@@ -6,6 +6,8 @@ import { AddSemester } from "./AddSemester";
 import { ClearAllTables } from "./ClearAllTables";
 import { ClearAllSemesters } from "./ClearAllSemesters";
 import catalog from "../assets/Catalog.json";
+import { Import } from "./Import";
+import { Export } from "./Export";
 
 export function AllSemestersTable(): JSX.Element {
 
@@ -117,6 +119,14 @@ export function AllSemestersTable(): JSX.Element {
             </Col>
             <Col>
                 <ClearAllSemesters allCourses={allCourses} setAllCourses={setAllCourses} />
+            </Col>
+        </Row>
+        <Row className="m-3">
+            <Col className="text-end">
+                <Export />
+            </Col>
+            <Col>
+                <Import />
             </Col>
         </Row>
     </Container>;
