@@ -150,10 +150,15 @@ test("remove all courses in semester", async () => {
 test("edit course", () => {
     goToScheduler();
 
+    const courses: string[] = ["CISC 275", "CISC 476", "DANC 312"];
     const semesterStr = "Fall2020";
 
+    for (let i = 0; i < courses.length; i++) {
+        addCourse(semesterStr,courses[i]);
+    }
+
     const semester = screen.getByRole("table", {name: semesterStr});
-    const editCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Edit"});
+    const editCourseButton = within(semester as HTMLElement).getAllByRole("button", {name: "Edit"})[0];
     userEvent.click(editCourseButton);
 
     const newName = "NEW NAME";
