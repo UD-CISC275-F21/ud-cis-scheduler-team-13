@@ -40,7 +40,7 @@ test("renders AddSemester", () => {
 // Should be "SeasonYear" such as Fall2022
 // Probably un-hard-code this later
 
-test("add semester to plan", () => {
+test("add semester to plan", async () => {
     goToScheduler();
 
     const newSemesterStr = "Fall2025";
@@ -54,6 +54,7 @@ test("add semester to plan", () => {
     userEvent.click(yearButton);
 
     // Select 2025
+    await screen.findByRole("button", {name: "2025"});
     const year2025 = screen.getByRole("button", {name: "2025"});
     userEvent.click(year2025);
 
