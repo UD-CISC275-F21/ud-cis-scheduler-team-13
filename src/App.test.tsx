@@ -88,8 +88,7 @@ test("remove course", () => {
     const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
     userEvent.click(remCourseButton);
 
-    const modal = screen.getByText("Type Name of Course Below:").parentNode.parentNode;
-    const enterCourse = within(modal as HTMLElement).getByRole("textbox");
+    const enterCourse = screen.getByRole("textbox");
     userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
 
     const course = screen.queryByText(courseStr);
@@ -134,9 +133,8 @@ test("edit course", () => {
     const editCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Edit"});
     userEvent.click(editCourseButton);
 
-    const modal = screen.getByText("Edit Course Information").parentNode.parentNode;
     const newName = "NEW NAME";
-    userEvent.type(within(modal as HTMLElement).getByRole("textbox", {name: "Enter New Name"}), "{selectall}{backspace}"+newName+"{enter}");
+    userEvent.type(screen.getByRole("textbox", {name: "Enter New Name"}), "{selectall}{backspace}"+newName+"{enter}");
 
     expect(screen.getByText(newName)).toBeInTheDocument();
 });
