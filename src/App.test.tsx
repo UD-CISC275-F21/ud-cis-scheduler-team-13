@@ -76,18 +76,24 @@ test("render remove course modal", async () => {
     userEvent.click(remCourseButton);
 
     await screen.findByText("Type Name of Course Below:");
-    const modalHeader = screen.findByText("Type Name of Course Below:");
+    const modalHeader = screen.getByText("Type Name of Course Below:");
     expect(modalHeader).toBeInTheDocument();
 });
 
-// test("remove course", () => {
-//     goToScheduler();
+test("remove course", async () => {
+    goToScheduler();
 
-//     const courseStr = "CISC 101";
+    const courseStr = "CISC 101";
 
-//     const semester = screen.getByText(courseStr).parentNode;
-//     const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
-//     userEvent.click(remCourseButton);
+    const semester = screen.getByText(courseStr).parentNode.parentNode.parentNode.parentNode.parentNode;
+    const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
+    userEvent.click(remCourseButton);
 
+    await screen.findByText("Type Name of Course Below:");
+    const modal = screen.getByText("Type Name of Course Below:").parentNode.parentNode;
+    const enterCourse = within(modal as HTMLElement).getByRole("textbox");
+    userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
 
-// });
+    const course = screen.queryByText(courseStr);
+    expect(course).not.toBeInTheDocument();
+});
