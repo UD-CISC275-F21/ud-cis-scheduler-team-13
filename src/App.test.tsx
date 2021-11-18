@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
 
@@ -43,16 +43,26 @@ test("renders AddSemester", () => {
 test("add semester to plan", () => {
     goToScheduler();
 
-    // Check if Fall2022 semester is there, it shouldn't be
-    const missingSemester = screen.queryByText("Fall2022");
+    const newSemesterStr = "Fall2025";
+
+    // Check if Fall2025 semester is there, it shouldn't be
+    const missingSemester = screen.queryByText(newSemesterStr);
     expect(missingSemester).not.toBeInTheDocument();
+
+    // Click year dropdown
+    const yearButton = screen.getByRole("button", {name: "2022"});
+    userEvent.click(yearButton);
+
+    // Select 2025
+    const year2025 = screen.getByRole("button", {name: "2025"});
+    userEvent.click(year2025);
 
     // Click submit to add the Fall2022 semester
     const submitButton = screen.getByRole("button", {name: "Submit"});
     userEvent.click(submitButton);
     
-    // Expect Fall2022 to be there
-    const newSemester = screen.getByText("Fall2022, Credit Limit: 21");
+    // Expect Fall2025 to be there
+    const newSemester = screen.getByRole("table", {name: newSemesterStr});
     expect(newSemester).toBeInTheDocument();
 });
 
@@ -159,7 +169,7 @@ test("remove all semesters", () => {
 
     const semesters: string[] = ["Fall2020", "Spring2021", "Summer2021"];
     for (let i = 0; i < semesters.length; i++) {
-        const semester = screen.getByRole("table", {name: semesters[i]})
+        const semester = screen.getByRole("table", {name: semesters[i]});
         expect(semester).toBeInTheDocument();
     }
 
