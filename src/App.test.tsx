@@ -4,6 +4,7 @@ import App from "./App";
 import userEvent from "@testing-library/user-event";
 
 function goToWelcomePage() {
+    render(<App />);
     userEvent.click(screen.getByText("UD CIS Scheduler"));
 }
 
@@ -19,7 +20,6 @@ test("renders UD CIS Scheduler text", () => {
 });
 
 test("welcomes user on open", () => {
-    render(<App />);
     goToWelcomePage();
     const welcomeMessage = screen.getByText("Welcome to the CIS Scheduler!");
     const instruction = screen.getByText("To Continue to the Scheduler, press the button below.");
@@ -28,7 +28,6 @@ test("welcomes user on open", () => {
 });
 
 test("renders AddSemester", () => {
-    render(<App />);
     goToScheduler();
     const addHeader = screen.getByText("Add Semester to Plan");
     expect(addHeader).toBeInTheDocument();
@@ -39,9 +38,9 @@ test("renders AddSemester", () => {
 // (i.e. Fall2022 should not be on the scheduler by default)
 // Also they rely on the display of a semester
 // Should be "SeasonYear" such as Fall2022
+// Probably un-hard-code this later
 
 test("add semester to plan", () => {
-    render(<App />);
     goToScheduler();
 
     // Check if Fall2022 semester is there, it shouldn't be
@@ -58,7 +57,6 @@ test("add semester to plan", () => {
 });
 
 test("remove semester from plan", () => {
-    render(<App />);
     goToScheduler();
 
     const fall2020SemStr = "Fall2020, Credit Limit: 21";
@@ -69,4 +67,14 @@ test("remove semester from plan", () => {
     userEvent.click(removeSemButton);
     const noFall2020 = screen.queryByText(fall2020SemStr);
     expect(noFall2020).not.toBeInTheDocument();
+});
+
+test("render remove course modal", () => {
+    goToScheduler();
+
+    const remCourseButton = screen.getAllByRole("button", {name: "Remove Course"})[0];
+    userEvent.click(remCourseButton);
+
+    const modalHeader = screen.getByText("Type Name of Course Below:");
+    expect(modalHeader).toBeInTheDocument();
 });
