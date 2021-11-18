@@ -69,18 +69,17 @@ test("remove semester from plan", () => {
     expect(noFall2020).not.toBeInTheDocument();
 });
 
-test("render remove course modal", async () => {
+test("render remove course modal", () => {
     goToScheduler();
 
     const remCourseButton = screen.getAllByRole("button", {name: "Remove Course"})[0];
     userEvent.click(remCourseButton);
 
-    await screen.findByText("Type Name of Course Below:");
     const modalHeader = screen.getByText("Type Name of Course Below:");
     expect(modalHeader).toBeInTheDocument();
 });
 
-test("remove course", async () => {
+test("remove course", () => {
     goToScheduler();
 
     const courseStr = "CISC 101";
@@ -89,7 +88,6 @@ test("remove course", async () => {
     const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
     userEvent.click(remCourseButton);
 
-    await screen.findByText("Type Name of Course Below:");
     const modal = screen.getByText("Type Name of Course Below:").parentNode.parentNode;
     const enterCourse = within(modal as HTMLElement).getByRole("textbox");
     userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
@@ -98,7 +96,7 @@ test("remove course", async () => {
     expect(course).not.toBeInTheDocument();
 });
 
-test("add course", async () => {
+test("add course", () => {
     goToScheduler();
 
     const courseStr = "CISC 275";
@@ -106,14 +104,13 @@ test("add course", async () => {
     expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
 
     userEvent.click(screen.getAllByRole("button", {name: "Add Course"})[0]);
-    await screen.findByText("Type Name of Course Below:");
     const enterCourse = screen.getByRole("textbox");
     userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
 
     expect(screen.getByText(courseStr)).toBeInTheDocument();
 });
 
-test("remove all courses in semester", async () => {
+test("remove all courses in semester", () => {
     goToScheduler();
 
     const courseStr = "CISC 101";
