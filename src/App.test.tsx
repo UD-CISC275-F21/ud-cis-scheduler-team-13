@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
 
@@ -34,12 +34,13 @@ test("renders AddSemester", () => {
     expect(addHeader).toBeInTheDocument();
 });
 
-test("add semester to plan", () => {
-    // This test relies on the default semesters
-    // (i.e. Fall2022 should not be on the scheduler by default)
-    // Also relies on the display of a semester
-    // Should be "SeasonYear" such as Fall2022
 
+// These tests rely on the default semesters
+// (i.e. Fall2022 should not be on the scheduler by default)
+// Also they rely on the display of a semester
+// Should be "SeasonYear" such as Fall2022
+
+test("add semester to plan", () => {
     render(<App />);
     goToScheduler();
 
@@ -54,4 +55,18 @@ test("add semester to plan", () => {
     // Expect Fall2022 to be there
     const newSemester = screen.getByText("Fall2022, Credit Limit: 21");
     expect(newSemester).toBeInTheDocument();
+});
+
+test("remove semester from plan", () => {
+    render(<App />);
+    goToScheduler();
+
+    const fall2020SemStr = "Fall2020, Credit Limit: 21";
+
+    const fall2020Semester = screen.getByText(fall2020SemStr).parentNode.parentNode;
+    const removeSemButton = within(fall2020Semester as HTMLElement).getByRole("button", {name: "Remove Semester"});
+    
+    userEvent.click(removeSemButton);
+    const noFall2020 = screen.queryByText(fall2020SemStr);
+    expect(noFall2020).not.toBeInTheDocument();
 });
