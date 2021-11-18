@@ -170,9 +170,10 @@ test("edit course", () => {
 test("clear all courses from all semesters", () => {
     goToScheduler();
 
-    const courses: string[] = ["CISC 101", "CISC 106"];
+    const semesterStr = "Fall2020";
+    const courses: string[] = ["CISC 275", "DANC 310", "DANC 313"];
     for (let i = 0; i < courses.length; i++) {
-        expect(screen.getByText(courses[i])).toBeInTheDocument();
+        addCourse(semesterStr, courses[i]);        
     }
 
     userEvent.click(screen.getByRole("button", {name: "ClearAllTables"}));
