@@ -114,10 +114,11 @@ test("remove all courses in semester", () => {
     goToScheduler();
 
     const courseStr = "CISC 101";
+    const semesterStr = "Fall2020";
 
     expect(screen.getByText(courseStr)).toBeInTheDocument();
 
-    const semester = screen.getByText(courseStr).parentNode.parentNode.parentNode.parentNode.parentNode;
+    const semester = screen.getByRole("table", {name: semesterStr});
     const remAllCoursesButton = within(semester as HTMLElement).getByRole("button", {name: "Remove All Courses"});
     userEvent.click(remAllCoursesButton);
 
