@@ -138,3 +138,34 @@ test("edit course", () => {
 
     expect(screen.getByText(newName)).toBeInTheDocument();
 });
+
+test("clear all courses from all semesters", () => {
+    goToScheduler();
+
+    const courses: string[] = ["CISC 101", "CISC 106"];
+    for (let i = 0; i < courses.length; i++) {
+        expect(screen.getByText(courses[i])).toBeInTheDocument();
+    }
+
+    userEvent.click(screen.getByRole("button", {name: "ClearAllTables"}));
+
+    for (let i = 0; i < courses.length; i++) {
+        expect(screen.queryByText(courses[i])).not.toBeInTheDocument();
+    }
+});
+
+test("remove all semesters", () => {
+    goToScheduler();
+
+    const semesters: string[] = ["Fall2020", "Spring2021", "Summer2021"];
+    for (let i = 0; i < semesters.length; i++) {
+        const semester = screen.getByRole("table", {name: semesters[i]})
+        expect(semester).toBeInTheDocument();
+    }
+
+    userEvent.click(screen.getByRole("button", {name: "Remove All Semesters"}));
+
+    for (let i = 0; i < semesters.length; i++) {
+        expect(screen.queryByRole("table", {name: semesters[i]})).not.toBeInTheDocument();
+    }
+});
