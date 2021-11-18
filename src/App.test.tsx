@@ -13,6 +13,13 @@ function goToScheduler() {
     userEvent.click(screen.getByText("Create New Schedule"));
 }
 
+function addCourse(semesterName: string, courseID: string) {
+    const addCourseButton = within(screen.getByRole("table", {name: semesterName})).getByRole("button", {name: "Add Course"});
+    userEvent.click(addCourseButton);
+
+    userEvent.type(screen.getByRole("textbox"),courseID+"{enter}");
+}
+
 test("renders UD CIS Scheduler text", () => {
     render(<App />);
     const linkElement = screen.getByText(/UD CIS Scheduler/i);
@@ -110,12 +117,9 @@ test("add course", () => {
     goToScheduler();
 
     const courseStr = "CISC 275";
-
     expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole("button", {name: "Add Course"})[0]);
-    const enterCourse = screen.getByRole("textbox");
-    userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
+    addCourse("Fall2020",courseStr);
 
     expect(screen.getByText(courseStr)).toBeInTheDocument();
 });
