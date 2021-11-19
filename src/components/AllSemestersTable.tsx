@@ -7,6 +7,8 @@ import { ClearAllTables } from "./ClearAllTables";
 import { ClearAllSemesters } from "./ClearAllSemesters";
 import { LocalSave } from "./LocalSave";
 import catalog from "../assets/Catalog.json";
+import { Import } from "./Import";
+import { Export } from "./Export";
 
 export function AllSemestersTable(): JSX.Element {
 
@@ -35,6 +37,7 @@ export function AllSemestersTable(): JSX.Element {
     // Pass this into SemesterTable
     const [allCourses, setAllCourses] = useState<Record<string, Course[]>>(defaultCourses);
 
+    console.log(allCourses);
     // https://stackoverflow.com/questions/11345296/partitioning-in-javascript
     // user starbeamrainbowlabs
     function partitionSemesters(allCourses: Record<string, Course[]>, n: number): string[][] {
@@ -122,6 +125,14 @@ export function AllSemestersTable(): JSX.Element {
         </Row>
         <Row>
             <LocalSave allCourses={allCourses} setAllCourses={setAllCourses}/>
+        </Row>
+        <Row className="m-3">
+            <Col className="text-end">
+                <Export AllCourses={allCourses} />
+            </Col>
+            <Col>
+                <Import />
+            </Col>
         </Row>
     </Container>;
 }
