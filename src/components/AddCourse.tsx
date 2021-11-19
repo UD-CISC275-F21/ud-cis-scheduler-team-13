@@ -4,6 +4,7 @@ import React, { useState, ChangeEvent } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Catalog from "../assets/Catalog.json";
+import FormControl from "@mui/material/FormControl";
 
 
 export function AddCourse({allCourses, setAllCourses, semesterName}: {
@@ -52,14 +53,15 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Label>
                             <Autocomplete
-                                sx={{ width: 300 }}
+                                sx={{ width: 465 }}
                                 options={Catalog}
                                 autoHighlight
                                 getOptionLabel={(option) => option.name}
-                                renderInput={(params) => (
+                                renderInput={params => (
                                     <TextField
+                                        onChange={courseChange}
+                                        onKeyPress={keyDownHandler}
                                         {...params}
                                         label="Enter Course Name"
                                         inputProps={{
@@ -69,7 +71,7 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                                     />
                                 )}
                             />
-                        </Form.Label>
+                        
                         <Form.Control type="Course" onChange={courseChange} onKeyPress={keyDownHandler}/>
                     </Form>
                 </Modal.Body>
