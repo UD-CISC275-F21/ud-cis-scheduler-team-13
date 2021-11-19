@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AddSemester } from "./AddSemester";
 import { ClearAllTables } from "./ClearAllTables";
 import { ClearAllSemesters } from "./ClearAllSemesters";
+import { LocalSave } from "./LocalSave";
 import catalog from "../assets/Catalog.json";
 
 export function AllSemestersTable(): JSX.Element {
@@ -117,7 +118,10 @@ export function AllSemestersTable(): JSX.Element {
             </Col>
             <Col>
                 <ClearAllSemesters allCourses={allCourses} setAllCourses={setAllCourses} />
-            </Col>
+            </Col>            
+        </Row>
+        <Row>
+            <LocalSave allCourses={allCourses} setAllCourses={setAllCourses}/>
         </Row>
     </Container>;
 }
