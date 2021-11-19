@@ -24,7 +24,7 @@ export function Export({AllCourses}:{
                 filename="My-Schedule.csv"
                 className=""
             >
-                <Button variant="success">Save Schedule</Button>
+                <Button variant="success">Download Schedule</Button>
             </CSVLink>
            
         </div>
