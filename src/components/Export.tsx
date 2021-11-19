@@ -1,29 +1,32 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { CSVLink } from "react-csv";
-import AllCourses from "../assets/Catalog.json";
+import { Course } from "../interfaces/Course";
 
-export function Export(): JSX.Element {
+export function Export({AllCourses}:{
+    AllCourses: Record<string, Course[]>
+}): JSX.Element {
 
-    const headers = [
-        { Label: "ID", key: "id" },
-        { Label: "Course Name", key: "name" },
-        { Label: "Description", key: "description" },
-        { Label: "Credits", key: "credits" },
-        { Label: "Prerequisites", key: "prereqs" }
-    ];
+    const data:Course[] = [];
+
+    Object.keys(AllCourses).map((key) => {
+        if(key !== "Remaining"){
+            AllCourses[key].forEach((item) => {
+                data.push({ semester:key, id: item.id, name:item.name, credits: item.credits } );
+            });
+        }
+    });
 
     return(
         <div>
-            {/*
             <CSVLink 
-                data={AllCourses}
-                header={headers}>
-                Save Schedule
+                data={data}
+                filename="My-Schedule.csv"
+                className=""
+            >
+                <Button variant="success">Save Schedule</Button>
             </CSVLink>
-            */}
-
-            <Button variant="success"> Download </Button>
+           
         </div>
     );
 }
