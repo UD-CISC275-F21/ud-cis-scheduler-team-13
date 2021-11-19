@@ -49,7 +49,7 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                 <Modal.Body>
                     <Form>
                         <Form.Label>Enter Course</Form.Label>
-                        <Form.Control type="Course" placeholder="Enter Course Name" onChange={courseChange} onKeyPress={keyDownHandler}/>
+                        <Form.Control type="Course" placeholder="Enter Course Name" onChange={courseChange} onKeyPress={keyDownHandler} aria-label="addCourseTextbox"/>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

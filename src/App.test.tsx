@@ -14,63 +14,70 @@ function goToScheduler() {
 }
 
 function addCourse(semesterName: string, courseID: string) {
-    const addCourseButton = within(screen.getByRole("table", {name: semesterName})).getByRole("button", {name: "Add Course"});
+    const addCourseButton: HTMLElement = within(screen.getByRole("table", {name: semesterName})).getByRole("button", {name: "Add Course"});
     userEvent.click(addCourseButton);
 
-    userEvent.type(screen.getByRole("textbox"),courseID+"{enter}");
+    userEvent.type(screen.getByRole("textbox", {name: "addCourseTextbox"}),courseID+"{enter}");
+}
+
+function addSemester(season: string, year: string) {
+    // Click year dropdown
+    const yearButton: HTMLElement = screen.getByRole("button", {name: "2022"});
+    userEvent.click(yearButton);
+
+    // Select year
+    userEvent.click(screen.getByRole("button", {name: year}));
+
+    // Click season dropdown
+    const seasonButton: HTMLElement = screen.getByTestId("seasonDropdown");
+    userEvent.click(seasonButton);
+
+    // Select season
+    userEvent.click(within(seasonButton).getByRole("button", {name: season}));
+
+    // Click submit to add the semester
+    const submitButton: HTMLElement = screen.getByRole("button", {name: "Submit"});
+    userEvent.click(submitButton);
 }
 
 test("renders UD CIS Scheduler text", () => {
     render(<App />);
-    const linkElement = screen.getByText(/UD CIS Scheduler/i);
+    const linkElement: HTMLElement = screen.getByText(/UD CIS Scheduler/i);
     expect(linkElement).toBeInTheDocument();
 });
 
 test("welcomes user on open", () => {
     goToWelcomePage();
-    const welcomeMessage = screen.getByText("Welcome to the CIS Scheduler!");
-    const instruction = screen.getByText("To Continue to the Scheduler, press the button below.");
+    const welcomeMessage: HTMLElement = screen.getByText("Welcome to the CIS Scheduler!");
+    const instruction: HTMLElement = screen.getByText("To Continue to the Scheduler, press the button below.");
     expect(welcomeMessage).toBeInTheDocument();
     expect(instruction).toBeInTheDocument();
 });
 
 test("renders AddSemester", () => {
     goToScheduler();
-    const addHeader = screen.getByText("Add Semester to Plan");
+    const addHeader: HTMLElement = screen.getByText("Add Semester to Plan");
     expect(addHeader).toBeInTheDocument();
 });
 
-
-// These tests rely on the default semesters
-// (i.e. Fall2022 should not be on the scheduler by default)
-// Also they rely on the display of a semester
+// These tests rely on the display of a semester
 // Should be "SeasonYear" such as Fall2022
-// Probably un-hard-code this later
 
-test("add semester to plan", async () => {
+test("add semester to plan", () => {
     goToScheduler();
 
     const newSemesterStr = "Fall2025";
+    const season = "Fall";
+    const year = "2025";
 
     // Check if Fall2025 semester is there, it shouldn't be
-    const missingSemester = screen.queryByText(newSemesterStr);
+    const missingSemester: HTMLElement | null = screen.queryByText(newSemesterStr);
     expect(missingSemester).not.toBeInTheDocument();
 
-    // Click year dropdown
-    const yearButton = screen.getByRole("button", {name: "2022"});
-    userEvent.click(yearButton);
-
-    // Select 2025
-    await screen.findByRole("button", {name: "2025"});
-    const year2025 = screen.getByRole("button", {name: "2025"});
-    userEvent.click(year2025);
-
-    // Click submit to add the Fall2022 semester
-    const submitButton = screen.getByRole("button", {name: "Submit"});
-    userEvent.click(submitButton);
+    addSemester(season, year);
     
     // Expect Fall2025 to be there
-    const newSemester = screen.getByRole("table", {name: newSemesterStr});
+    const newSemester: HTMLElement = screen.getByRole("table", {name: newSemesterStr});
     expect(newSemester).toBeInTheDocument();
 });
 
@@ -79,41 +86,43 @@ test("remove semester from plan", () => {
 
     const fall2020SemStr = "Fall2020, Credit Limit: 21";
 
-    const fall2020Semester = screen.getByRole("table", {name: "Fall2020"});
-    const removeSemButton = within(fall2020Semester as HTMLElement).getByRole("button", {name: "Remove Semester"});
+    const fall2020Semester: HTMLElement = screen.getByRole("table", {name: "Fall2020"});
+    const removeSemButton: HTMLElement = within(fall2020Semester as HTMLElement).getByRole("button", {name: "Remove Semester"});
     
     userEvent.click(removeSemButton);
-    const noFall2020 = screen.queryByText(fall2020SemStr);
+    const noFall2020: HTMLElement | null = screen.queryByText(fall2020SemStr);
     expect(noFall2020).not.toBeInTheDocument();
 });
 
 test("render remove course modal", () => {
     goToScheduler();
 
-    const remCourseButton = screen.getAllByRole("button", {name: "Remove Course"})[0];
+    const remCourseButton: HTMLElement = screen.getAllByRole("button", {name: "Remove Course"})[0];
     userEvent.click(remCourseButton);
 
-    const modalHeader = screen.getByText("Type Name of Course Below:");
+    const modalHeader: HTMLElement = screen.getByText("Type Name of Course Below:");
     expect(modalHeader).toBeInTheDocument();
 });
 
 test("remove course", () => {
     goToScheduler();
 
-    const courseStr = "CISC 101";
+    const courseStr = "CISC 275";
+    const semesterStr = "Fall2020";
+    addCourse(semesterStr,courseStr);
 
-    const semester = screen.getByRole("table", {name: "Fall2020"});
-    const remCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
+    const semester: HTMLElement = screen.getByRole("table", {name: semesterStr});
+    const remCourseButton: HTMLElement = within(semester as HTMLElement).getByRole("button", {name: "Remove Course"});
     userEvent.click(remCourseButton);
 
-    const enterCourse = screen.getByRole("textbox");
+    const enterCourse: HTMLElement = screen.getByRole("textbox", {name: "removeCourseTextbox"});
     userEvent.type(enterCourse as HTMLElement, courseStr+"{enter}");
 
-    const course = screen.queryByText(courseStr);
+    const course: HTMLElement | null = screen.queryByText(courseStr);
     expect(course).not.toBeInTheDocument();
 });
 
-test("add course", () => {
+test("add course", async () => {
     goToScheduler();
 
     const courseStr = "CISC 275";
@@ -121,31 +130,41 @@ test("add course", () => {
 
     addCourse("Fall2020",courseStr);
 
+    await screen.findByText(courseStr);
     expect(screen.getByText(courseStr)).toBeInTheDocument();
 });
 
-test("remove all courses in semester", () => {
+test("remove all courses in semester", async () => {
     goToScheduler();
 
-    const courseStr = "CISC 101";
+    const courses: string[] = ["CISC 275", "DANC 312"];
     const semesterStr = "Fall2020";
 
-    expect(screen.getByText(courseStr)).toBeInTheDocument();
+    for (let i = 0; i < courses.length; i++) {
+        addCourse(semesterStr, courses[i]);
+    }
 
-    const semester = screen.getByRole("table", {name: semesterStr});
-    const remAllCoursesButton = within(semester as HTMLElement).getByRole("button", {name: "Remove All Courses"});
+    const semester: HTMLElement = screen.getByRole("table", {name: semesterStr});
+    const remAllCoursesButton: HTMLElement = within(semester as HTMLElement).getByRole("button", {name: "Remove All Courses"});
     userEvent.click(remAllCoursesButton);
 
-    expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
+    for (let i = 0; i < courses.length; i++) {
+        expect(screen.queryByText(courses[i])).not.toBeInTheDocument();
+    }
 });
 
 test("edit course", () => {
     goToScheduler();
 
+    const courses: string[] = ["CISC 275", "CISC 476", "DANC 312"];
     const semesterStr = "Fall2020";
 
-    const semester = screen.getByRole("table", {name: semesterStr});
-    const editCourseButton = within(semester as HTMLElement).getByRole("button", {name: "Edit"});
+    for (let i = 0; i < courses.length; i++) {
+        addCourse(semesterStr,courses[i]);
+    }
+
+    const semester: HTMLElement = screen.getByRole("table", {name: semesterStr});
+    const editCourseButton: HTMLElement = within(semester as HTMLElement).getAllByRole("button", {name: "Edit"})[0];
     userEvent.click(editCourseButton);
 
     const newName = "NEW NAME";
@@ -157,9 +176,10 @@ test("edit course", () => {
 test("clear all courses from all semesters", () => {
     goToScheduler();
 
-    const courses: string[] = ["CISC 101", "CISC 106"];
+    const semesterStr = "Fall2020";
+    const courses: string[] = ["CISC 275", "DANC 310", "DANC 313"];
     for (let i = 0; i < courses.length; i++) {
-        expect(screen.getByText(courses[i])).toBeInTheDocument();
+        addCourse(semesterStr, courses[i]);        
     }
 
     userEvent.click(screen.getByRole("button", {name: "ClearAllTables"}));
