@@ -12,6 +12,10 @@ export function LocalSave({allCourses, setAllCourses}: {
 
     function savePlan(): void {
         localStorage.setItem(LOCAL_STORAGE_COURSES,JSON.stringify(allCourses));
+
+        if (warnNoLoad) {
+            setWarnNoLoad(false);
+        }
     }
 
     function loadPlan(): void {
