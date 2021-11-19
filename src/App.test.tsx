@@ -20,6 +20,26 @@ function addCourse(semesterName: string, courseID: string) {
     userEvent.type(screen.getByRole("textbox", {name: "addCourseTextbox"}),courseID+"{enter}");
 }
 
+function addSemester(season: string, year: string) {
+    // Click year dropdown
+    const yearButton = screen.getByRole("button", {name: "2022"});
+    userEvent.click(yearButton);
+
+    // Select year
+    userEvent.click(screen.getByRole("button", {name: year}));
+
+    // Click season dropdown
+    const seasonButton = screen.getByTestId("seasonDropdown");
+    userEvent.click(seasonButton);
+
+    // Select season
+    userEvent.click(within(seasonButton).getByRole("button", {name: season}));
+
+    // Click submit to add the semester
+    const submitButton = screen.getByRole("button", {name: "Submit"});
+    userEvent.click(submitButton);
+}
+
 test("renders UD CIS Scheduler text", () => {
     render(<App />);
     const linkElement = screen.getByText(/UD CIS Scheduler/i);
@@ -40,34 +60,21 @@ test("renders AddSemester", () => {
     expect(addHeader).toBeInTheDocument();
 });
 
-
-// These tests rely on the default semesters
-// (i.e. Fall2022 should not be on the scheduler by default)
-// Also they rely on the display of a semester
+// These tests rely on the display of a semester
 // Should be "SeasonYear" such as Fall2022
-// Probably un-hard-code this later
 
 test("add semester to plan", async () => {
     goToScheduler();
 
     const newSemesterStr = "Fall2025";
+    const season = "Fall";
+    const year = "2025";
 
     // Check if Fall2025 semester is there, it shouldn't be
     const missingSemester = screen.queryByText(newSemesterStr);
     expect(missingSemester).not.toBeInTheDocument();
 
-    // Click year dropdown
-    const yearButton = screen.getByRole("button", {name: "2022"});
-    userEvent.click(yearButton);
-
-    // Select 2025
-    await screen.findByRole("button", {name: "2025"});
-    const year2025 = screen.getByRole("button", {name: "2025"});
-    userEvent.click(year2025);
-
-    // Click submit to add the Fall2022 semester
-    const submitButton = screen.getByRole("button", {name: "Submit"});
-    userEvent.click(submitButton);
+    addSemester(season, year);
     
     // Expect Fall2025 to be there
     const newSemester = screen.getByRole("table", {name: newSemesterStr});
@@ -115,7 +122,7 @@ test("remove course", () => {
     expect(course).not.toBeInTheDocument();
 });
 
-test("add course", () => {
+test("add course", async () => {
     goToScheduler();
 
     const courseStr = "CISC 275";
@@ -123,19 +130,18 @@ test("add course", () => {
 
     addCourse("Fall2020",courseStr);
 
+    await screen.findByText(courseStr);
     expect(screen.getByText(courseStr)).toBeInTheDocument();
 });
 
 test("remove all courses in semester", async () => {
     goToScheduler();
 
-    const courses: string[] = ["CISC 275", "CISC 476", "DANC 312"];
+    const courses: string[] = ["CISC 275", "DANC 312"];
     const semesterStr = "Fall2020";
 
     for (let i = 0; i < courses.length; i++) {
         addCourse(semesterStr, courses[i]);
-        await screen.findByText(courses[i]);
-        expect(screen.getByText(courses[i])).toBeInTheDocument();
     }
 
     const semester = screen.getByRole("table", {name: semesterStr});
