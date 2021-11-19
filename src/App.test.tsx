@@ -63,7 +63,7 @@ test("renders AddSemester", () => {
 // These tests rely on the display of a semester
 // Should be "SeasonYear" such as Fall2022
 
-test("add semester to plan", async () => {
+test("add semester to plan", () => {
     goToScheduler();
 
     const newSemesterStr = "Fall2025";
