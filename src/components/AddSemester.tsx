@@ -57,11 +57,11 @@ export function AddSemester({allCourses, setAllCourses}: {
         </Row>
         <Row>
             <Col className="text-end">
-                <DropdownButton id="dropdown-season" title={dropdownSeason} onSelect={handleSeasonSelect}>
-                    <Dropdown.Item eventKey="Fall">Fall</Dropdown.Item>
-                    <Dropdown.Item eventKey="Winter">Winter</Dropdown.Item>
-                    <Dropdown.Item eventKey="Spring">Spring</Dropdown.Item>
-                    <Dropdown.Item eventKey="Summer">Summer</Dropdown.Item>
+                <DropdownButton id="dropdown-season" title={dropdownSeason} onSelect={handleSeasonSelect} data-testid="seasonDropdown">
+                    <Dropdown.Item eventKey="Fall" data-testid="FallDropdown">Fall</Dropdown.Item>
+                    <Dropdown.Item eventKey="Winter" data-testid="WinterDropdown">Winter</Dropdown.Item>
+                    <Dropdown.Item eventKey="Spring" data-testid="SpringDropdown">Spring</Dropdown.Item>
+                    <Dropdown.Item eventKey="Summer" data-testid="SummerDropdown">Summer</Dropdown.Item>
                 </DropdownButton>
             </Col>
             <Col className="text-center" md="auto">

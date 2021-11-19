@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AddSemester } from "./AddSemester";
 import { ClearAllTables } from "./ClearAllTables";
 import { ClearAllSemesters } from "./ClearAllSemesters";
+import { LocalSave } from "./LocalSave";
 import catalog from "../assets/Catalog.json";
 import { Import } from "./Import";
 import { Export } from "./Export";
@@ -105,7 +106,7 @@ export function AllSemestersTable(): JSX.Element {
     return <Container>
         <AddSemester allCourses={allCourses} setAllCourses={setAllCourses}></AddSemester>
         {partitionedKeys.map((nKeys: string[]) => {
-            return <Row key={nKeys[1]}>
+            return <Row key={nKeys[1]+nKeys[2]}>
                 {nKeys.map((key: string) => {
                     return <Col key={key}>
                         <SemesterTable semesterName={key} creditLimit={getCreditLim(key)} 
@@ -120,7 +121,10 @@ export function AllSemestersTable(): JSX.Element {
             </Col>
             <Col>
                 <ClearAllSemesters allCourses={allCourses} setAllCourses={setAllCourses} />
-            </Col>
+            </Col>            
+        </Row>
+        <Row>
+            <LocalSave allCourses={allCourses} setAllCourses={setAllCourses}/>
         </Row>
         <Row className="m-3">
             <Col className="text-end">

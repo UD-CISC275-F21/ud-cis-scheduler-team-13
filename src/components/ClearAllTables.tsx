@@ -24,7 +24,7 @@ export function ClearAllTables({allCourses, setAllCourses}: {
 
     return(
         <div>
-            <Button variant="primary" onClick={handleRemove}>
+            <Button variant="primary" onClick={handleRemove} aria-label="ClearAllTables">
                 Remove All Courses
             </Button>
         </div>

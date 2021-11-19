@@ -54,7 +54,7 @@ export function EditCourse({course, allCourses, setAllCourses, semesterName}: {
                 <Modal.Body>
                     <Form>
                         <Form.Label>Edit name of course</Form.Label>
-                        <Form.Control value={nameCourse} type="Course" placeholder="Enter New Name" onChange={nameChange} onKeyPress={keyDownHandler}/>
+                        <Form.Control value={nameCourse} type="Course" placeholder="Enter New Name" onChange={nameChange} onKeyPress={keyDownHandler} aria-label="Enter New Name"/>
                     </Form>
                     <Form>
                         <Form.Label>Edit description of course</Form.Label>
