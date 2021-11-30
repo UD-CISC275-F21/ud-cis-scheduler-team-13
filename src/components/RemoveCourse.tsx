@@ -26,9 +26,16 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
 
     function courseSubmit(){
         const copyCourses = {...allCourses};
+
+        // For i courses in the current semester
         for (let i = 0; i < copyCourses[semesterName].length; i++) {
             if (copyCourses[semesterName][i].id === inputCourse){
-                copyCourses.Remaining.push(copyCourses[semesterName][i]);
+                // Check if the course is already in Remaining before pushing
+                const remainingCourseIDs: string[] = copyCourses.Remaining.map( (c: Course) => c.id);
+                if (!remainingCourseIDs.includes(inputCourse)) {
+                    copyCourses.Remaining.push(copyCourses[semesterName][i]);
+                }
+                // Remove course from current semester
                 copyCourses[semesterName].splice(i,1);
             }
         }
