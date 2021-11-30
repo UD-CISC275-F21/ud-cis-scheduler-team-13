@@ -26,10 +26,21 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
 
     function courseSubmit(){
         const copyCourses = {...allCourses};
-        for (let i = 0; i < copyCourses.Remaining.length; i++) {
-            if (copyCourses.Remaining[i].id === inputCourse){
-                copyCourses[semesterName].push(copyCourses.Remaining[i]);
-                copyCourses.Remaining.splice(i,1);
+
+        // Find courses
+        const semesterKeys: string[] = Object.keys(copyCourses);
+        for (let j = 0; j < semesterKeys.length; j++) {
+            // For each semester j
+            const currentSemesterCourses: Course[] = copyCourses[semesterKeys[j]];
+            for (let i = 0; i < currentSemesterCourses.length; i++) {
+                // For each course i in semester j, find the inputCourse
+                if (semesterName !== semesterKeys[j] && currentSemesterCourses[i].id === inputCourse){
+                    // Add the course if it's not already in the semester
+                    copyCourses[semesterName].push(copyCourses.Remaining[i]);
+                    copyCourses.Remaining.splice(i,1);
+                } else if (semesterName !== semesterKeys[j]) {
+                    // Warn user about trying to add the course to the same semester
+                }
             }
         }
         setAllCourses(copyCourses);
