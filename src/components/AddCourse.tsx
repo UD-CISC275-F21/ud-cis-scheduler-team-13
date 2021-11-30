@@ -40,11 +40,9 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
 
         // Find courses
         const semesterKeys: string[] = Object.keys(copyCourses);
-        console.log("found keys");
         for (let j = 0; j < semesterKeys.length; j++) {
             // For each semester j
             const currentSemesterCourses: Course[] = copyCourses[semesterKeys[j]];
-            console.log(`found courses in ${semesterKeys[j]}`);
             for (let i = 0; i < currentSemesterCourses.length; i++) {
                 // For each course i in semester j, find the inputCourse
                 if (semesterName !== semesterKeys[j] && currentSemesterCourses[i].id === inputCourse){                                    
