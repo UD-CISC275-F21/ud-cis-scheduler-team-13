@@ -37,7 +37,6 @@ export function AllSemestersTable(): JSX.Element {
     // Pass this into SemesterTable
     const [allCourses, setAllCourses] = useState<Record<string, Course[]>>(defaultCourses);
 
-    console.log(allCourses);
     // https://stackoverflow.com/questions/11345296/partitioning-in-javascript
     // user starbeamrainbowlabs
     function partitionSemesters(allCourses: Record<string, Course[]>, n: number): string[][] {
