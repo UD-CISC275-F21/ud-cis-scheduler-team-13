@@ -34,16 +34,20 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
             return;
         }
 
+        // Course does not exist in the current semester
+        console.log("course does not already exist in current semester");
         const copyCourses = {...allCourses};
 
         // Find courses
         const semesterKeys: string[] = Object.keys(copyCourses);
+        console.log("found keys");
         for (let j = 0; j < semesterKeys.length; j++) {
             // For each semester j
             const currentSemesterCourses: Course[] = copyCourses[semesterKeys[j]];
+            console.log(`found courses in ${semesterKeys[j]}`);
             for (let i = 0; i < currentSemesterCourses.length; i++) {
                 // For each course i in semester j, find the inputCourse
-                if (currentSemesterCourses[i].id === inputCourse){                                    
+                if (semesterName !== semesterKeys[j] && currentSemesterCourses[i].id === inputCourse){                                    
                     copyCourses[semesterName].push(currentSemesterCourses[i]);
 
                     // Remove inputCourse from Remaining if it was found in Remaining
@@ -55,6 +59,7 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
         }
         setAllCourses(copyCourses);
         handleClose();
+        
     }
 
     return(
