@@ -25,6 +25,15 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
     }
 
     function courseSubmit(){
+
+        // If the course already exists in the current semester, stop without adding
+        const currentSemesterCourseIDs: string[] = allCourses[semesterName].map( (c: Course) => c.id);
+        if (currentSemesterCourseIDs.includes(inputCourse)) {
+            // Warn user about trying to add the course to the same semester
+            handleClose();
+            return;
+        }
+
         const copyCourses = {...allCourses};
 
         // Find courses
@@ -34,12 +43,13 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
             const currentSemesterCourses: Course[] = copyCourses[semesterKeys[j]];
             for (let i = 0; i < currentSemesterCourses.length; i++) {
                 // For each course i in semester j, find the inputCourse
-                if (semesterName !== semesterKeys[j] && currentSemesterCourses[i].id === inputCourse){
-                    // Add the course if it's not already in the semester
-                    copyCourses[semesterName].push(copyCourses.Remaining[i]);
-                    copyCourses.Remaining.splice(i,1);
-                } else if (semesterName !== semesterKeys[j]) {
-                    // Warn user about trying to add the course to the same semester
+                if (currentSemesterCourses[i].id === inputCourse){                                    
+                    copyCourses[semesterName].push(currentSemesterCourses[i]);
+
+                    // Remove inputCourse from Remaining if it was found in Remaining
+                    if (semesterKeys[j] === "Remaining") {
+                        copyCourses.Remaining.splice(i,1);
+                    }
                 }
             }
         }
