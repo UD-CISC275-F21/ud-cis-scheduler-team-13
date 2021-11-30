@@ -35,7 +35,6 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
         }
 
         // Course does not exist in the current semester
-        console.log("course does not already exist in current semester");
         const copyCourses = {...allCourses};
 
         // Find courses
