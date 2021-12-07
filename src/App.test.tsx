@@ -128,10 +128,29 @@ test("add course", async () => {
     const courseStr = "CISC 275";
     expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
 
-    addCourse("Fall2020",courseStr);
+    addCourse("Fall2020", courseStr);
 
     await screen.findByText(courseStr);
     expect(screen.getByText(courseStr)).toBeInTheDocument();
+});
+
+test("add same course to multiple semesters", async () => {
+    goToScheduler();
+
+    const courseStr = "CISC 275";
+    expect(screen.queryByText(courseStr)).not.toBeInTheDocument();
+
+    addCourse("Fall2020", courseStr);
+
+    await screen.findByText(courseStr);
+    expect(screen.getByText(courseStr)).toBeInTheDocument();
+
+    addCourse("Spring2021", courseStr);
+
+    const semester: HTMLElement = screen.getByRole("table", {name: "Spring2021"});
+    await within(semester as HTMLElement).findByText(courseStr);
+
+    expect(within(semester as HTMLElement).getByText(courseStr)).toBeInTheDocument();
 });
 
 test("remove all courses in semester", async () => {
