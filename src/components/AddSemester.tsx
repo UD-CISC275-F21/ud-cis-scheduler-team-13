@@ -24,9 +24,12 @@ export function AddSemester({allCourses, setAllCourses}: {
 
     function yearChangeText(e: ChangeEvent<HTMLInputElement>): void {
         const key: string | null = e.target.value;
+        
         if (key !== null && !isNaN(parseInt(key))) {
             setYear(String(parseInt(key)));
-        }        
+        } else if (key === "") {
+            setYear("");
+        }       
     }
 
     function addSemester(): void {
@@ -56,6 +59,14 @@ export function AddSemester({allCourses, setAllCourses}: {
         return years;
     }
 
+    function dropdownLabel(): string {
+        if (year === "") {
+            return "Year";
+        } else {
+            return year;
+        }
+    }
+
     const years = makeYears();
 
     return <Container className="m-3 p-3 border border-primary">
@@ -73,7 +84,7 @@ export function AddSemester({allCourses, setAllCourses}: {
             </Col>
             <Col className="text-center" xs={3}>
                 <Row>
-                    <DropdownButton id="dropdown-year" title={year} onSelect={yearChangeDropdown}>
+                    <DropdownButton id="dropdown-year" title={dropdownLabel()} onSelect={yearChangeDropdown}>
                         {years.map((y: string) => {
                             return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
                         })}
