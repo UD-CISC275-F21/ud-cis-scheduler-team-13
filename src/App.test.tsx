@@ -43,7 +43,7 @@ function addSemesterDropdown(season: string, year: string) {
 function addSemesterText(season: string, year: string) {
     // Click year text form and type the year
     const yearForm: HTMLElement = screen.getByRole("textbox", {name: "yearTextbox"});
-    userEvent.type(yearForm,year);
+    userEvent.type(yearForm,"{selectall}{backspace}"+year);
 
     // Click season dropdown
     const seasonButton: HTMLElement = screen.getByTestId("seasonDropdown");
