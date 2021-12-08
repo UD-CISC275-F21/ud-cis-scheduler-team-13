@@ -20,13 +20,30 @@ function addCourse(semesterName: string, courseID: string) {
     userEvent.type(screen.getByRole("textbox", {name: "addCourseTextbox"}),courseID+"{enter}");
 }
 
-function addSemester(season: string, year: string) {
+function addSemesterDropdown(season: string, year: string) {
     // Click year dropdown
     const yearButton: HTMLElement = screen.getByRole("button", {name: "2022"});
     userEvent.click(yearButton);
 
     // Select year
     userEvent.click(screen.getByRole("button", {name: year}));
+
+    // Click season dropdown
+    const seasonButton: HTMLElement = screen.getByTestId("seasonDropdown");
+    userEvent.click(seasonButton);
+
+    // Select season
+    userEvent.click(within(seasonButton).getByRole("button", {name: season}));
+
+    // Click submit to add the semester
+    const submitButton: HTMLElement = screen.getByRole("button", {name: "Submit"});
+    userEvent.click(submitButton);
+}
+
+function addSemesterText(season: string, year: string) {
+    // Click year text form and type the year
+    const yearForm: HTMLElement = screen.getByRole("textbox", {name: "2022"});
+    userEvent.type(yearForm,year);
 
     // Click season dropdown
     const seasonButton: HTMLElement = screen.getByTestId("seasonDropdown");
@@ -63,7 +80,7 @@ test("renders AddSemester", () => {
 // These tests rely on the display of a semester
 // Should be "SeasonYear" such as Fall2022
 
-test("add semester to plan", () => {
+test("add semester to plan with dropdown", () => {
     goToScheduler();
 
     const newSemesterStr = "Fall2025";
@@ -74,7 +91,25 @@ test("add semester to plan", () => {
     const missingSemester: HTMLElement | null = screen.queryByText(newSemesterStr);
     expect(missingSemester).not.toBeInTheDocument();
 
-    addSemester(season, year);
+    addSemesterDropdown(season, year);
+    
+    // Expect Fall2025 to be there
+    const newSemester: HTMLElement = screen.getByRole("table", {name: newSemesterStr});
+    expect(newSemester).toBeInTheDocument();
+});
+
+test("add semester to plan with text", () => {
+    goToScheduler();
+
+    const newSemesterStr = "Fall2025";
+    const season = "Fall";
+    const year = "2025";
+
+    // Check if Fall2025 semester is there, it shouldn't be
+    const missingSemester: HTMLElement | null = screen.queryByText(newSemesterStr);
+    expect(missingSemester).not.toBeInTheDocument();
+
+    addSemesterText(season, year);
     
     // Expect Fall2025 to be there
     const newSemester: HTMLElement = screen.getByRole("table", {name: newSemesterStr});
