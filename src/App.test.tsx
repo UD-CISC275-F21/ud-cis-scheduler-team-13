@@ -36,7 +36,7 @@ function addSemesterDropdown(season: string, year: string) {
     userEvent.click(within(seasonButton).getByRole("button", {name: season}));
 
     // Click submit to add the semester
-    const submitButton: HTMLElement = screen.getByRole("button", {name: "Submit"});
+    const submitButton: HTMLElement = screen.getByRole("button", {name: "Add Semester"});
     userEvent.click(submitButton);
 }
 
@@ -53,7 +53,7 @@ function addSemesterText(season: string, year: string) {
     userEvent.click(within(seasonButton).getByRole("button", {name: season}));
 
     // Click submit to add the semester
-    const submitButton: HTMLElement = screen.getByRole("button", {name: "Submit"});
+    const submitButton: HTMLElement = screen.getByRole("button", {name: "Add Semester"});
     userEvent.click(submitButton);
 }
 
