@@ -1,5 +1,5 @@
-import { useState } from "react";
-import React, { Container, Row, Dropdown, DropdownButton, Button, Col } from "react-bootstrap";
+import { useState, ChangeEvent } from "react";
+import React, { Container, Row, Dropdown, DropdownButton, Button, Col, Form } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 
 export function AddSemester({allCourses, setAllCourses}: {
@@ -16,10 +16,20 @@ export function AddSemester({allCourses, setAllCourses}: {
         }
     }
 
-    function yearChange(key: string | null): void {
+    function yearChangeDropdown(key: string | null): void {
         if (key !== null) {
             setYear(key);
         }        
+    }
+
+    function yearChangeText(e: ChangeEvent<HTMLInputElement>): void {
+        const key: string | null = e.target.value;
+        
+        if (key !== null && !isNaN(parseInt(key))) {
+            setYear(String(parseInt(key)));
+        } else if (key === "") {
+            setYear("");
+        }       
     }
 
     function addSemester(): void {
@@ -49,6 +59,14 @@ export function AddSemester({allCourses, setAllCourses}: {
         return years;
     }
 
+    function dropdownLabel(): string {
+        if (year === "") {
+            return "Year";
+        } else {
+            return year;
+        }
+    }
+
     const years = makeYears();
 
     return <Container className="m-3 p-3 border border-primary">
@@ -64,15 +82,24 @@ export function AddSemester({allCourses, setAllCourses}: {
                     <Dropdown.Item eventKey="Summer" data-testid="SummerDropdown">Summer</Dropdown.Item>
                 </DropdownButton>
             </Col>
-            <Col className="text-center" md="auto">
-                <DropdownButton id="dropdown-year" title={year} onSelect={yearChange}>
-                    {years.map((y: string) => {
-                        return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
-                    })}
-                </DropdownButton>
-                {sameSemWarn && <p className="sameSemWarning">
-                    That semester is already in the plan
-                </p>}
+            <Col className="text-center" xs={3}>
+                <Row>
+                    <DropdownButton id="dropdown-year" title={dropdownLabel()} onSelect={yearChangeDropdown}>
+                        {years.map((y: string) => {
+                            return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
+                        })}
+                    </DropdownButton>
+                    {sameSemWarn && <p className="sameSemWarning">
+                        That semester is already in the plan
+                    </p>}
+                </Row>
+                <Row className="text-center">
+                    <Form className="text-center">
+                        <Form.Label>Select or input year</Form.Label>
+                        <Form.Control className="text-center" type="Year" placeholder={year} 
+                            onChange={yearChangeText} value={year} aria-label="yearTextbox"/>
+                    </Form>
+                </Row>
             </Col>
             <Col>
                 <Button type="submit" onClick={addSemester}>Submit</Button>
