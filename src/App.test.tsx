@@ -258,3 +258,28 @@ test("remove all semesters", () => {
         expect(screen.queryByRole("table", {name: semesters[i]})).not.toBeInTheDocument();
     }
 });
+
+test("local save/load", () => {
+    goToScheduler();
+
+    // Save initial semesters
+    const semesters: string[] = ["Fall2020", "Spring2021", "Summer2021"];
+    for (let i = 0; i < semesters.length; i++) {
+        const semester = screen.getByRole("table", {name: semesters[i]});
+        expect(semester).toBeInTheDocument();
+    }
+    userEvent.click(screen.getByRole("button", {name: "Save Current Plan"}));
+
+    // Remove all semesters
+    userEvent.click(screen.getByRole("button", {name: "Remove All Semesters"}));
+    for (let i = 0; i < semesters.length; i++) {
+        expect(screen.queryByRole("table", {name: semesters[i]})).not.toBeInTheDocument();
+    }
+
+    // Load and recheck initial
+    userEvent.click(screen.getByRole("button", {name: "Load Plan"}));
+    for (let i = 0; i < semesters.length; i++) {
+        const semester = screen.getByRole("table", {name: semesters[i]});
+        expect(semester).toBeInTheDocument();
+    }
+});
