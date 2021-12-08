@@ -1,5 +1,5 @@
-import { useState } from "react";
-import React, { Container, Row, Dropdown, DropdownButton, Button, Col } from "react-bootstrap";
+import { useState, ChangeEvent } from "react";
+import React, { Container, Row, Dropdown, DropdownButton, Button, Col, Form } from "react-bootstrap";
 import { Course } from "../interfaces/Course";
 
 export function AddSemester({allCourses, setAllCourses}: {
@@ -16,9 +16,16 @@ export function AddSemester({allCourses, setAllCourses}: {
         }
     }
 
-    function yearChange(key: string | null): void {
+    function yearChangeDropdown(key: string | null): void {
         if (key !== null) {
             setYear(key);
+        }        
+    }
+
+    function yearChangeText(e: ChangeEvent<HTMLInputElement>): void {
+        const key: string | null = e.target.value;
+        if (key !== null && !isNaN(parseInt(key))) {
+            setYear(String(parseInt(key)));
         }        
     }
 
@@ -65,14 +72,22 @@ export function AddSemester({allCourses, setAllCourses}: {
                 </DropdownButton>
             </Col>
             <Col className="text-center" md="auto">
-                <DropdownButton id="dropdown-year" title={year} onSelect={yearChange}>
-                    {years.map((y: string) => {
-                        return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
-                    })}
-                </DropdownButton>
-                {sameSemWarn && <p className="sameSemWarning">
-                    That semester is already in the plan
-                </p>}
+                <Row>
+                    <DropdownButton id="dropdown-year" title={year} onSelect={yearChangeDropdown}>
+                        {years.map((y: string) => {
+                            return <Dropdown.Item key={y} eventKey={y}>{y}</Dropdown.Item>;
+                        })}
+                    </DropdownButton>
+                    {sameSemWarn && <p className="sameSemWarning">
+                        That semester is already in the plan
+                    </p>}
+                </Row>
+                <Row>
+                    <Form>
+                        <Form.Label>Select or input year</Form.Label>
+                        <Form.Control type="Year" placeholder="2022" onChange={yearChangeText}/>
+                    </Form>
+                </Row>
             </Col>
             <Col>
                 <Button type="submit" onClick={addSemester}>Submit</Button>
