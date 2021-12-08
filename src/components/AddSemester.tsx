@@ -102,7 +102,7 @@ export function AddSemester({allCourses, setAllCourses}: {
                 </Row>
             </Col>
             <Col>
-                <Button type="submit" onClick={addSemester}>Submit</Button>
+                <Button type="submit" onClick={addSemester}>Add Semester</Button>
             </Col>
         </Row>
     </Container>;
