@@ -71,7 +71,7 @@ export function AddSemester({allCourses, setAllCourses}: {
                     <Dropdown.Item eventKey="Summer" data-testid="SummerDropdown">Summer</Dropdown.Item>
                 </DropdownButton>
             </Col>
-            <Col className="text-center" md="auto">
+            <Col className="text-center" xs={3}>
                 <Row>
                     <DropdownButton id="dropdown-year" title={year} onSelect={yearChangeDropdown}>
                         {years.map((y: string) => {
@@ -82,10 +82,10 @@ export function AddSemester({allCourses, setAllCourses}: {
                         That semester is already in the plan
                     </p>}
                 </Row>
-                <Row>
-                    <Form>
+                <Row className="text-center">
+                    <Form className="text-center">
                         <Form.Label>Select or input year</Form.Label>
-                        <Form.Control type="Year" placeholder="2022" onChange={yearChangeText}/>
+                        <Form.Control className="text-center" type="Year" placeholder={year} onChange={yearChangeText} value={year}/>
                     </Form>
                 </Row>
             </Col>
