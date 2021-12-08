@@ -85,7 +85,8 @@ export function AddSemester({allCourses, setAllCourses}: {
                 <Row className="text-center">
                     <Form className="text-center">
                         <Form.Label>Select or input year</Form.Label>
-                        <Form.Control className="text-center" type="Year" placeholder={year} onChange={yearChangeText} value={year}/>
+                        <Form.Control className="text-center" type="Year" placeholder={year} 
+                            onChange={yearChangeText} value={year} aria-label="yearTextbox"/>
                     </Form>
                 </Row>
             </Col>
