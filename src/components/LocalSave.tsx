@@ -32,7 +32,7 @@ export function LocalSave({allCourses, setAllCourses}: {
             <Row>
                 <Col className="text-end">
                     <Button variant="primary" onClick={savePlan}>
-                        Save current plan
+                        Save Current Plan
                     </Button>
                 </Col>
                 <Col>
