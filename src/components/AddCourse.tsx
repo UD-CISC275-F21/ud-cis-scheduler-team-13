@@ -1,10 +1,7 @@
 import { Course } from "../interfaces/Course";
 import { Button, Form, Modal } from "react-bootstrap";
 import React, { useState, ChangeEvent } from "react";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Catalog from "../assets/Catalog.json";
-import FormControl from "@mui/material/FormControl";
+import Select from "react-Select";
 
 
 export function AddCourse({allCourses, setAllCourses, semesterName}: {
@@ -24,6 +21,19 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
             event.preventDefault();
         }
     };
+
+    function courseOptions() {
+        const options: Course[] = [];
+
+        const copyCourses = {...allCourses};
+        for (let i = 0; i < copyCourses.Remaining.length; i++) {
+            copyCourses.Remaining[i].id.push(options.id);
+            copyCourses.Remaining[i].id.push(options);
+            copyCourses.Remaining[i].id.push(options);
+        }
+    
+    }
+
 
     function courseChange(e: ChangeEvent<HTMLInputElement>): void {
         setInputCourse(e.target.value);
@@ -53,25 +63,13 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                            <Autocomplete
-                                sx={{ width: 465 }}
-                                options={Catalog}
-                                autoHighlight
-                                getOptionLabel={(option) => option.name}
-                                renderInput={params => (
-                                    <TextField
-                                        onChange={courseChange}
-                                        onKeyPress={keyDownHandler}
-                                        {...params}
-                                        label="Enter Course Name"
-                                        inputProps={{
-                                            ...params.inputProps,
-                                            autoComplete: "new-password", // disable autocomplete and autofill
-                                        }}
-                                    />
-                                )}
-                            />
-                        
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="i.e. CISC 220"
+                            defaultValue={colourOptions[0]}
+                            name="color"
+                            options={courseOptions}
+                        />
                         <Form.Control type="Course" onChange={courseChange} onKeyPress={keyDownHandler}/>
                     </Form>
                 </Modal.Body>
