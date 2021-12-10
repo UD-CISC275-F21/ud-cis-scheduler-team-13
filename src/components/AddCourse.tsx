@@ -1,9 +1,7 @@
 import { Course } from "../interfaces/Course";
 import { Button, Modal } from "react-bootstrap";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import Select, { SingleValue } from "react-select";
-import Catalog from "../assets/Catalog.json";
-//import { SearchableCourse } from "../interfaces/SearchableCourse";
 
 
 export function AddCourse({allCourses, setAllCourses, semesterName}: {
@@ -12,33 +10,48 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
     semesterName: string}): JSX.Element {
     
     const [inputCourse, setInputCourse] = useState<string>("");
-    const [input, setInput] = useState(null);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const onchangeSelect = (newValue: SingleValue<Course>) => {
         setInputCourse(newValue?.id || "");
-        
-    };
-    console.log("fofy hota", inputCourse);
-    /*
-    function courseChange(e: ChangeEvent<HTMLInputElement>): void {
-        setInputCourse(e.target.value);
     }
-    */
-
+    
     function courseSubmit(){
+
+        // If the course already exists in the current semester, stop without adding
+        const currentSemesterCourseIDs: string[] = allCourses[semesterName].map( (c: Course) => c.id);
+        if (currentSemesterCourseIDs.includes(inputCourse)) {
+            // Warn user about trying to add the course to the same semester
+            handleClose();
+            return;
+        }
+
+        // Course does not exist in the current semester
         const copyCourses = {...allCourses};
-        for (let i = 0; i < copyCourses.Remaining.length; i++) {
-            if (copyCourses.Remaining[i].id === inputCourse){
-                copyCourses[semesterName].push(copyCourses.Remaining[i]);
-                copyCourses.Remaining.splice(i,1);
+
+        // Find courses
+        const semesterKeys: string[] = Object.keys(copyCourses);
+        for (let j = 0; j < semesterKeys.length; j++) {
+            // For each semester j
+            const currentSemesterCourses: Course[] = copyCourses[semesterKeys[j]];
+            for (let i = 0; i < currentSemesterCourses.length; i++) {
+                // For each course i in semester j, find the inputCourse
+                if (semesterName !== semesterKeys[j] && currentSemesterCourses[i].id === inputCourse){                                    
+                    copyCourses[semesterName].push(currentSemesterCourses[i]);
+
+                    // Remove inputCourse from Remaining if it was found in Remaining
+                    if (semesterKeys[j] === "Remaining") {
+                        copyCourses.Remaining.splice(i,1);
+                    }
+                }
             }
         }
 
         setAllCourses(copyCourses);
         handleClose();
+        
     }
 
     return(
@@ -57,8 +70,8 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                         placeholder="Select Course"
                         name="course"
                         options={allCourses.Remaining}
-                        getOptionLabel={(options) => options.id}
-                        getOptionValue={(options) => options.id}
+                        getOptionLabel={(options: Course) => options.id}
+                        getOptionValue={(options: Course) => options.id}
                         onChange={onchangeSelect}
                     />
                 </Modal.Body>

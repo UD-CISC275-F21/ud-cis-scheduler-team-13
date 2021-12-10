@@ -20,7 +20,7 @@ export default function RemoveCourse({allCourses, setAllCourses, semesterName}: 
 
     return(
         <div>
-            <Button variant="primary" onClick={handleRemove}>
+            <Button variant="danger" onClick={handleRemove}>
                 Remove All Courses
             </Button>
         </div>
