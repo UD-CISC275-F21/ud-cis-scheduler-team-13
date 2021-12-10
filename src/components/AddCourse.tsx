@@ -1,7 +1,8 @@
 import { Course } from "../interfaces/Course";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import React, { useState, ChangeEvent } from "react";
-import Select from "react-Select";
+import Select from "react-select";
+import Catalog from "../assets/Catalog.json";
 
 
 export function AddCourse({allCourses, setAllCourses, semesterName}: {
@@ -22,21 +23,10 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
         }
     };
 
-    function courseOptions() {
-        const options: Course[] = [];
-
-        const copyCourses = {...allCourses};
-        for (let i = 0; i < copyCourses.Remaining.length; i++) {
-            copyCourses.Remaining[i].id.push(options.id);
-            copyCourses.Remaining[i].id.push(options);
-            copyCourses.Remaining[i].id.push(options);
-        }
-    
-    }
-
-
     function courseChange(e: ChangeEvent<HTMLInputElement>): void {
         setInputCourse(e.target.value);
+
+        console.log("fofy hpta", e.target.value);
     }
 
     function courseSubmit(){
@@ -47,8 +37,13 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                 copyCourses.Remaining.splice(i,1);
             }
         }
+
         setAllCourses(copyCourses);
         handleClose();
+
+        console.log("duvan hpta", inputCourse );
+        setInputCourse("");
+        console.log("mouse hpta", inputCourse );
     }
 
     return(
@@ -62,17 +57,13 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                     <Modal.Title>Type Name of Course Below:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Select
-                            className="basic-single"
-                            classNamePrefix="i.e. CISC 220"
-                            defaultValue={colourOptions[0]}
-                            name="color"
-                            options={courseOptions}
-                        />
-                        <Form.Control type="Course" onChange={courseChange} onKeyPress={keyDownHandler}/>
-                    </Form>
-                </Modal.Body>
+                    <Select
+                        className="basic-single"
+                        classNamePrefix="Select Course"
+                        name="Course-selection"
+                        options={Catalog[0].id}
+                    />
+                </Modal.Body>   
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
@@ -85,4 +76,3 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
         </div>
     );
 }
-
