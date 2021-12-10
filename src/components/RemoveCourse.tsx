@@ -1,29 +1,24 @@
 import { Course } from "../interfaces/Course";
-import { Button, Form, Modal } from "react-bootstrap";
-import React, { useState, ChangeEvent } from "react";
+import { Button, Modal } from "react-bootstrap";
+import React, { useState } from "react";
+import Select, { SingleValue } from "react-select";
 
 export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
     allCourses: Record<string, Course[]>,
     setAllCourses: (c: Record<string, Course[]>)=>void, 
     semesterName: string}): JSX.Element {
     
+    console.log("semName", semesterName);
+
     const [inputCourse, setInputCourse] = useState<string>("");
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            courseSubmit();
-            event.preventDefault();
-        }
+    const onchangeSelect = (newValue: SingleValue<Course>) => {
+        setInputCourse(newValue?.id || "");
     };
-
-    function courseChange(e: ChangeEvent<HTMLInputElement>): void {
-        setInputCourse(e.target.value);
-    }
-
+    
     function courseSubmit(){
         const copyCourses = {...allCourses};
 
@@ -41,11 +36,11 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
         }
         setAllCourses(copyCourses);
         handleClose();
-    }
+    }       
 
     return(
         <div>
-            <Button variant="danger" onClick={handleShow}>
+            <Button variant="primary" onClick={handleShow}>
                 Remove Course
             </Button>
 
@@ -54,10 +49,15 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
                     <Modal.Title>Type Name of Course Below:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Form.Label>Enter Course</Form.Label>
-                        <Form.Control type="Course" placeholder="Enter Course Name" onChange={courseChange} onKeyPress={keyDownHandler} aria-label="removeCourseTextbox"/>
-                    </Form>
+                    <Select
+                        className="basic-single"
+                        placeholder="Select Course"
+                        name="course"
+                        options={allCourses.semester}
+                        getOptionLabel={(options: Course) => options.id}
+                        getOptionValue={(options: Course) => options.id}
+                        onChange={onchangeSelect}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
