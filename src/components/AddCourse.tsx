@@ -16,7 +16,7 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
     const handleShow = () => setShow(true);
     const onchangeSelect = (newValue: SingleValue<Course>) => {
         setInputCourse(newValue?.id || "");
-    }
+    };
     
     function courseSubmit(){
 
