@@ -1,8 +1,9 @@
 import { Course } from "../interfaces/Course";
 import { Button, Modal } from "react-bootstrap";
 import React, { useState, ChangeEvent } from "react";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 import Catalog from "../assets/Catalog.json";
+//import { SearchableCourse } from "../interfaces/SearchableCourse";
 
 
 export function AddCourse({allCourses, setAllCourses, semesterName}: {
@@ -11,23 +12,21 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
     semesterName: string}): JSX.Element {
     
     const [inputCourse, setInputCourse] = useState<string>("");
+    const [input, setInput] = useState(null);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            courseSubmit();
-            event.preventDefault();
-        }
+    const onchangeSelect = (newValue: SingleValue<Course>) => {
+        setInputCourse(newValue?.id || "");
+        
     };
-
+    console.log("fofy hota", inputCourse);
+    /*
     function courseChange(e: ChangeEvent<HTMLInputElement>): void {
         setInputCourse(e.target.value);
-
-        console.log("fofy hpta", e.target.value);
     }
+    */
 
     function courseSubmit(){
         const copyCourses = {...allCourses};
@@ -40,10 +39,6 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
 
         setAllCourses(copyCourses);
         handleClose();
-
-        console.log("duvan hpta", inputCourse );
-        setInputCourse("");
-        console.log("mouse hpta", inputCourse );
     }
 
     return(
@@ -59,11 +54,14 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                 <Modal.Body>
                     <Select
                         className="basic-single"
-                        classNamePrefix="Select Course"
-                        name="Course-selection"
-                        options={Catalog[0].id}
+                        placeholder="Select Course"
+                        name="course"
+                        options={allCourses.Remaining}
+                        getOptionLabel={(options) => options.id}
+                        getOptionValue={(options) => options.id}
+                        onChange={onchangeSelect}
                     />
-                </Modal.Body>   
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
