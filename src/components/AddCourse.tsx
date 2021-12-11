@@ -1,6 +1,8 @@
 import { Course } from "../interfaces/Course";
-import { Button, Form, Modal } from "react-bootstrap";
-import React, { useState, ChangeEvent } from "react";
+import { Button, Modal } from "react-bootstrap";
+import React, { useState } from "react";
+import Select, { SingleValue } from "react-select";
+
 
 export function AddCourse({allCourses, setAllCourses, semesterName}: {
     allCourses: Record<string, Course[]>,
@@ -12,18 +14,10 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            courseSubmit();
-            event.preventDefault();
-        }
+    const onchangeSelect = (newValue: SingleValue<Course>) => {
+        setInputCourse(newValue?.id || "");
     };
-
-    function courseChange(e: ChangeEvent<HTMLInputElement>): void {
-        setInputCourse(e.target.value);
-    }
-
+    
     function courseSubmit(){
 
         // If the course already exists in the current semester, stop without adding
@@ -54,6 +48,7 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                 }
             }
         }
+
         setAllCourses(copyCourses);
         handleClose();
         
@@ -70,10 +65,15 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
                     <Modal.Title>Type Name of Course Below:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Form.Label>Enter Course</Form.Label>
-                        <Form.Control type="Course" placeholder="Enter Course Name" onChange={courseChange} onKeyPress={keyDownHandler} aria-label="addCourseTextbox"/>
-                    </Form>
+                    <Select
+                        className="basic-single"
+                        placeholder="Select Course"
+                        name="course"
+                        options={allCourses.Remaining}
+                        getOptionLabel={(options: Course) => options.id}
+                        getOptionValue={(options: Course) => options.id}
+                        onChange={onchangeSelect}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -87,4 +87,3 @@ export function AddCourse({allCourses, setAllCourses, semesterName}: {
         </div>
     );
 }
-

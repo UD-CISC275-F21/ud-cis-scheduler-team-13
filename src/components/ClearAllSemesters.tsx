@@ -38,7 +38,7 @@ export function ClearAllSemesters({allCourses, setAllCourses}: {
 
     return(
         <div>
-            <Button variant="primary" onClick={handleRemove}>
+            <Button variant="danger" onClick={handleRemove}>
                 Remove All Semesters
             </Button>
         </div>
