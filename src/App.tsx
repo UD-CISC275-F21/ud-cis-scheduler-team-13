@@ -1,17 +1,24 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Switch from "./components/Switch";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { BrowserRouter as Router} from "react-router-dom";
+
+
 
 function App(): JSX.Element {
+
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                UD CIS Scheduler
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-            </header>
+            <Router>
+                <Header></Header>
+                <div className="Contents">
+                    <Switch />
+                </div>
+                <Footer></Footer>
+            </Router>
         </div>
     );
 }
