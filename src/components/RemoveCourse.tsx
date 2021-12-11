@@ -7,8 +7,6 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
     allCourses: Record<string, Course[]>,
     setAllCourses: (c: Record<string, Course[]>)=>void, 
     semesterName: string}): JSX.Element {
-    
-    console.log("semName", semesterName);
 
     const [inputCourse, setInputCourse] = useState<string>("");
     const [show, setShow] = useState(false);
@@ -53,7 +51,7 @@ export function RemoveCourse({allCourses, setAllCourses, semesterName}: {
                         className="basic-single"
                         placeholder="Select Course"
                         name="course"
-                        options={allCourses.semester}
+                        options={allCourses[semesterName]}
                         getOptionLabel={(options: Course) => options.id}
                         getOptionValue={(options: Course) => options.id}
                         onChange={onchangeSelect}
